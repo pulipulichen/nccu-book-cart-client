@@ -1,0 +1,17 @@
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="cht_eip_20151116.pulipuli.blogspot.tw" version="1.0.0">
+
+    <name>CHT-EIP</name>
+    <description>
+        使用Onsen UI製作行動版網頁的展示，包含條碼掃描的功能。
+        詳細原始碼可以到 https://github.com/pulipulichen/cht-eip 下載。
+    </description>
+    <author href="http://pulipuli.blogspot.tw" email="pulipuli.chen@gmail.com">布丁布丁吃布丁</author>
+
+    <content src="index.html"/>
+    <icon src="icon.png"/>
+
+    <preference name="phonegap-version" value="3.7.0" />
+    <gap:plugin name="com.phonegap.plugins.barcodescanner" />
+    <gap:plugin name="de.appplant.cordova.plugin.local-notification" />
+  
+</widget>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
+<html lang="en" ng-csp>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+
+        <!-- JS dependencies (order matters!) -->
+        <script src="scripts/platformOverrides.js"></script>
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular/angular-translate.min.js"></script>
+        <script src="lib/angular/angular-translate-loader-static-files.min.js"></script>
+
+        <script src="lib/onsen/js/onsenui.min.js"></script>
+        <script src="lib/zepto/zepto.min.js"></script>
+
+        <!-- CSS dependencies -->
+        <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+
+        <!-- CSP support mode (required for Windows Universal apps) -->
+        <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+
+        <!-- --------------- App init --------------- -->
+        <link rel="stylesheet" href="css/onsen-css-components-default.css" />
+        <link rel="stylesheet" href="css/myapp.css" />
+        <!-- Cordova reference -->
+        <!-- <script src="cordova.js"></script> -->
+        <script src="scripts/cordova.index.js"></script>
+        <script src="js/onsen-init.js"></script>
+        <title>{{ 'TITLE' | translate }}</title>
+        
+
+    </head>
+
+    <body>
+    
+    <ons-navigator var="app.navi" page="welcome.html"></ons-navigator> 
+
+    <script src="js/myapp.js"></script>
+
+</body>
+</html>
