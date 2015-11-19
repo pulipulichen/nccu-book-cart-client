@@ -1,5 +1,11 @@
 {
     "TITLE": "政大借書籃",
+    
     "SCAN_BARCODE": "掃描條碼",
-    "SEARCH": "搜尋"
+    
+    "SEARCH": "搜尋",
+    
+    "BOOK_LIST": "借書清單",
+    
+    "MAP": "地圖"
 }

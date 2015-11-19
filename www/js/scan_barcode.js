@@ -23,26 +23,5 @@ scan_barcode = function () {
         });
     }
 };
-//
 
-
-
-//            ons.bootstrap();
-//            ons.ready(function () {
-//                var app = angular.module('app', ['pascalprecht.translate']);
-//app.config(function ($translateProvider) {
-//    $translateProvider.preferredLanguage('en');
-//   $translateProvider.useStaticFilesLoader({
-//        prefix: 'i18n/',
-//        suffix: '.json'
-//    });
-//});
-//            });
-//ons.bootstrap();
-
-//      module.controller('AppController', function($scope) { });
-//      module.controller('PageController', function($scope) {
-//        ons.ready(function() {
-//          // Init code here
-//        });
-//      });
+// ------------------------

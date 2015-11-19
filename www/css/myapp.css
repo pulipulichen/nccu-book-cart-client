@@ -130,3 +130,7 @@ input[type=email], input[type=password] {
 #welcome_html ons-button {
     margin-top: 10px;
 }
+
+#scan_barcode {
+    width: 100%;
+}
