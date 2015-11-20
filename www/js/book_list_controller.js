@@ -14,7 +14,7 @@ app.controller('book_list_controller', function ($scope) {
 
     // 初始化資料庫
     DB.open_db();
-    DB.drop_table("list");
+    //DB.drop_table("list");
     DB.create_table("list", [
         "author",
         "title",
@@ -54,6 +54,28 @@ app.controller('book_list_controller', function ($scope) {
     $scope.completed_list = [];
     $scope.isbn = "";
     $scope.mock_isbn = "9789862168370";  //賈伯斯傳
+
+    $scope.location_image = {
+        "社資二樓政大論文區": "img/ssic_2f_s.jpg",
+        
+        "總圖附件": "img/ccl_cht_1f.jpg",
+        "總圖三樓中文圖書區": "img/ccl_cht_3f.jpg",
+        "總圖三樓新書區": "img/ccl_cht_3f.jpg",
+        "總圖四樓西文圖書區": "img/ccl_cht_4f.jpg",
+        "總圖四樓新書區": "img/ccl_cht_4f.jpg",
+        
+        "綜圖一樓中文新書區": "img/cclsl_cht_1f.jpg",
+        "綜圖二樓西文新書區": "img/cclsl_cht_2f.jpg",
+        "綜圖B1中文": "img/cclsl_cht_b1.jpg",
+        "綜圖2F西文": "img/cclsl_cht_2f.jpg",
+        
+        "商圖": "img/cbl_cht.jpg",
+        "商圖附件": "img/cbl_cht.jpg",
+        
+        "傳圖": "img/cjl_cht.jpg"
+    };
+    $scope.map_title = "";
+    $scope.map_src = "";
 
     // -----------------
 
@@ -197,6 +219,7 @@ app.controller('book_list_controller', function ($scope) {
                     $scope.load_todo_list(function (_data) {
                         //app.navi.pushPage('list.html');
                         console.log(_data);
+                        $scope.isbn = "";
                         $scope.$digest();
                         _trigger_callback(_callback);
                     });
@@ -311,7 +334,11 @@ app.controller('book_list_controller', function ($scope) {
     };
 
     $scope.open_map = function (_location) {
-        ons.notification.alert(_location);
+        //ons.notification.alert(_location);
+        $scope.map_title = _location;
+        $scope.map_src = $scope.location_image[_location];
+        
+        app.navi.pushPage("map.html");
     };
 
     $scope.complete_item = function (_id, _callback) {

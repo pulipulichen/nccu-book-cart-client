@@ -35,20 +35,14 @@
 
 
     <ons-list ng-repeat="location in todo_list">
-        <ons-list-item class="location" modifier="chevron" class="list-item-container"  ng-click="open_map(location.location)" ng-show="location.location != ''">
+        <ons-list-item class="location" modifier="chevron" class="list-item-container"  
+                       ng-click="open_map(location.location)" ng-show="location.location != ''">
             <div class="list-item-left">
                 {{location.location}}
             </div>
             <div class="list-item-right">    
             </div>
         </ons-list-item>
-
-        
-                
-                    {{item.title}}
-                    {{item.call_number}}
-                    {{item.update_timestamp}}
-                    {{item.id}}
         
         <ons-list-item modifier="tappable" 
                        ng-repeat="item in location.items" ng-click="complete_item(item.id)"

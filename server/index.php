@@ -10,9 +10,11 @@ include_once 'lib/rb.config.php';
 //$isbn = 9789862168370;
 
 if (isset($_GET["isbn"]) === FALSE) {
-    echo json_encode(array(
+    $json = json_encode(array(
         "error" => "NO_ISBN"
             ), JSON_UNESCAPED_UNICODE);
+    echo $json;
+    book_list_log($json);
     exit();
 }
 
@@ -23,15 +25,18 @@ $isbn = $_GET["isbn"];
 $result = R::find("cache_query_result", 'isbn = ? AND timestamp > ?'
         , array(
             $isbn,
-            time()-$cache_sec
+            time() - $CONFIG["cache_sec"]
         ));
 
 //echo time()-100;
 if (count($result) > 0) {
+    $json = "";
     foreach ($result as $r) {
-        echo $r->json;
+        $json = "" . $r->json;
         //echo "/*" . $r->timestamp . "*/";
     }
+    echo $json;
+    book_list_log($json);
     
     exit();
 }
@@ -48,13 +53,17 @@ $url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" . $
 //$url = "query_test/found_book_available.html";
 //$url = "query_test/found_book_multi_available.html";
 //$url = "query_test/found_book_not_available.html";
-//$content = file_get_contents("found_book_available.html");
+$content = file_get_contents($url);
+//echo $content;
+
+//exit();
 
 require 'lib/querypath/src/qp.php';
 
 $qp = htmlqp($url);
 
-if ($qp->find('.msg td:contains("無查獲符合查詢條件的館藏;相近 國際標準號碼 是:")')->size() > 0) {
+if ($qp->find('.msg td:contains("無查獲符合查詢條件的館藏;相近 國際標準號碼 是:")')->size() > 0 
+        || $qp->find('.msg td:contains("無查獲符合的,可用相近 國際標準號碼 的是:")')->size() > 0 ) {
     
     // ---------------------------------------------
     // isbn_not_found
@@ -134,4 +143,4 @@ $result->timestamp = time();
 
 
 echo $json;
-
+book_list_log($json);
