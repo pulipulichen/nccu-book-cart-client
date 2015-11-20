@@ -11,3 +11,7 @@ ons.notification.alert = function (_opt) {
 
     ons.notification._alert(_opt);
 };
+
+$.log = function (_msg) {
+    console.log(_msg);
+};

@@ -137,9 +137,57 @@ app.controller('book_list_controller', function ($scope) {
             }
         });
     };
+    
+    $scope.clear_list = function (_callback) {
+        ons.notification.confirm({
+            message: "確定要清空借書籃嗎？",
+            callback: function (_answer) {
+                //console.log(_answer);
+                if (_answer === 1) {
+                    DB.empty_table("list");
+                    $scope.load_lists(_callback);
+                }
+            }
+        });
+    };
+    
+    $scope.clear_todo_list = function (_callback) {
+        ons.notification.confirm({
+            message: "確定要清空借書清單嗎？",
+            callback: function (_answer) {
+                //console.log(_answer);
+                if (_answer === 1) {
+                    DB.exec("DELETE FROM list WHERE checked = 0", function () {
+                        $scope.load_todo_list(_callback);
+                    });
+                }
+            }
+        });
+    };
+    
+    $scope.clear_completed_list = function (_callback) {
+        ons.notification.confirm({
+            message: "確定要清空歷史記錄嗎？",
+            callback: function (_answer) {
+                //console.log(_answer);
+                if (_answer === 1) {
+                    DB.exec("DELETE FROM list WHERE checked = 1", function () {
+                        $scope.load_completed_list(_callback);
+                    });
+                }
+            }
+        });
+    };
 
-    $scope.add = function (_callback) {
-        var _isbn = $.trim($('[name="isbn"]').val());
+    $scope.add = function (_isbn, _callback) {
+        if (typeof(_isbn) === "function") {
+            _callback = _isbn;
+            _isbn = null;
+        }
+        
+        if (typeof(_isbn) !== "string") {
+            _isbn = $.trim($('[name="isbn"]').val());
+        }
         console.log(_isbn);
         $scope.has_item(_isbn, function (_result, _item) {
             //console.log("_.add" + _result);
@@ -159,7 +207,7 @@ app.controller('book_list_controller', function ($scope) {
         });
         return false;
     };
-    
+
     $scope.has_item_notify = function (_item, _callback) {
         //console.log(_item);
         ons.notification.alert(_item.title + " 已經有資料了");
@@ -187,7 +235,7 @@ app.controller('book_list_controller', function ($scope) {
             var _checked = 0;
             var _create_timestamp = (new Date()).getTime();
             var _update_timestamp = _create_timestamp;
-            
+
             $scope.has_item(_isbn, function (_result, _item) {
                 if (_result === false) {
                     DB.exec('INSERT INTO list '
@@ -205,7 +253,7 @@ app.controller('book_list_controller', function ($scope) {
                 }
             });
 
-            
+
         });
     };
 
@@ -248,45 +296,44 @@ app.controller('book_list_controller', function ($scope) {
             });
         });
     };
-    
+
     $scope.search = function () {
         $scope.add();
     };
-    
+
     $scope.scan_barcode = function () {
-    
-    var _search = function (_isbn) {
-        $scope.isbn = _isbn;
-        $scope.$digest();
-        $scope.add();
-    };
-    
-    if (typeof (cordova) !== "undefined") {
-        cordova.plugins.barcodeScanner.scan(
-                function (_result) {
-                    _search(_result.text);
-                },
-                function (error) {
-                    ons.notification.alert({
-                        message: "Scanning failed: " + error,
-                        // or messageHTML: '<div>Message in HTML</div>',
-                        title: '錯誤',
-                        buttonLabel: 'OK'
-                    });
-                }
-        );
-    }
-    else {
-        
+        var _search = function (_isbn) {
+            $scope.isbn = _isbn;
+            //$scope.$digest();
+            $scope.add(_isbn);
+        };
+
+        if (typeof (cordova) !== "undefined") {
+            cordova.plugins.barcodeScanner.scan(
+                    function (_result) {
+                        _search(_result.text);
+                    },
+                    function (error) {
+                        ons.notification.alert({
+                            message: "Scanning failed: " + error,
+                            // or messageHTML: '<div>Message in HTML</div>',
+                            title: '錯誤',
+                            buttonLabel: 'OK'
+                        });
+                    }
+            );
+        }
+        else {
+            _search($scope.mock_isbn);
 //        ons.notification.alert({
 //            message: '只有手機才能使用掃描條碼功能',
 //            // or messageHTML: '<div>Message in HTML</div>',
 //            title: '錯誤',
 //            buttonLabel: 'OK'
 //        });
-        
-    }
-};
+
+        }
+    };
 
     // -------------------
 
@@ -294,7 +341,8 @@ app.controller('book_list_controller', function ($scope) {
         //console.log("ready");
         $scope.load_todo_list(function () {
             //console.log("ready 2");
-
+            //$("#search_barcode_button").click();
+            //$scope.$digest();
             // 要做這件事情才能夠更新畫面
             //$scope.$digest();
         });
