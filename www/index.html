@@ -25,8 +25,6 @@
         <link rel="stylesheet" href="css/onsen-css-components-default.css" />
         <link rel="stylesheet" href="css/myapp.css" />
         <!-- Cordova reference -->
-        <!-- <script src="cordova.js"></script> -->
-        <script src="scripts/cordova.index.js"></script>
         <script src="js/onsen-init.js"></script>
         
         <script src="js/database_utils.js"></script>
@@ -36,12 +34,16 @@
 
     </head>
 
-    <body ng-controller="BookListController">
+    <body ng-controller="book_list_controller">
     
     <ons-navigator var="app.navi" page="scan.html"></ons-navigator> 
 
-    <script src="js/BookListController.js"></script>
+    <!-- ---------------------------------------- -->
+    <script src="js/book_list_controller.js"></script>
     <script src="js/scan_barcode.js"></script>
 
+    <script src="cordova.js"></script>
+    <script src="scripts/cordova.index.js"></script>
+        
 </body>
 </html>

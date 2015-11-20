@@ -5,21 +5,34 @@
         <div class="center">{{ 'TITLE' | translate}}</div>
 
         <div class="right" ng-click="clear_list()">
-            <ons-toolbar-button><i class="icon ion-close-circled"></i>
+            <ons-toolbar-button>
+                <i class="icon ion-close-circled"></i>
             </ons-toolbar-button>
         </div>
     </ons-toolbar>
 
-    <ons-row>
 
+
+    <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
         <ons-button modifier="large--cta" onclick="scan_barcode()">{{ 'SCAN_BARCODE' | translate }}</ons-button>
-        <form id="scan_barcode" ng-submit="add(this);">
-            <input type="search" class="search-input" name="isbn"
-                   value="{{isbn}}"
-                   placeholder="Search...">
-        </form>
-        <button ng-click="load_list()" style="display: none" type="button" id="load_list"></button>
     </ons-row>
+    <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
+        <ons-col>
+            <form id="scan_barcode" ng-submit="add();">
+                <input type="search" class="search-input" name="isbn"
+                       value="{{isbn}}"
+                       placeholder="Search...">
+            </form>
+        </ons-col>
+
+        <ons-col width="40px" ng-click="search()">
+            <ons-button>
+                <ons-icon icon="fa-search"></ons-icon>
+            </ons-button>
+        </ons-col>
+
+    </ons-row>
+
 
     <ons-list ng-repeat="location in todo_list">
         <ons-list-item class="location" modifier="chevron" class="list-item-container"  ng-click="open_map(location.location)" ng-show="location.location != ''">
@@ -29,18 +42,20 @@
             <div class="list-item-right">    
             </div>
         </ons-list-item>
-        
+
         <ons-list-item modifier="tappable" 
-                       ng-repeat="item in location.items" ng-click="complete_item(item.id)">
-            <label class="checkbox checkbox--list-item">
-                <input type="checkbox" />
-                <div class="checkbox__checkmark checkbox--list-item__checkmark">
-                </div>
-                    {{item.title}}
-                    {{item.call_number}}
-                    {{item.update_timestamp}}
-                    {{item.id}}
-            </label>
+                       ng-repeat="item in location.items" ng-click="complete_item(item.id)"
+                       class="list-item-container">
+            <div class="list-item-left">
+                <!-- <input type="checkbox" /> -->
+                <img src="images/4548488065_dae90277db_q.jpg" class="avator">
+            </div>
+            <div class="list-item-right">
+                <span class="title" style="display: block;font-weight: bold;">{{item.title}}</span>
+                <span class="call_number" style="font-size: smaller;color: orange;">{{item.call_number}}</span>
+                <span class="update_timestamp" style="display:none;">{{item.update_timestamp}}</span>
+                <span class="id" style="display:none;">{{item.id}}</span>
+            </div>
         </ons-list-item>
     </ons-list>
 
@@ -57,7 +72,8 @@
             </button>
         </label>
 
-        <label class="tab-bar__item" ng-click="app.navi.replacePage('completed_list.html', {animation: 'none'});load_completed_list()">
+        <label class="tab-bar__item" ng-click="app.navi.replacePage('completed_list.html', {animation: 'none'});
+            load_completed_list()">
             <input type="radio" name="tab-bar-main" />
             <button class="tab-bar__button">
                 <i class="tab-bar__icon ion-ios-list-outline"></i>

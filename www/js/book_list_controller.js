@@ -1,4 +1,4 @@
-app.controller('BookListController', function ($scope) {
+app.controller('book_list_controller', function ($scope) {
 
     var CONFIG;
     $.getJSON("config.json", function (_config) {
@@ -52,6 +52,7 @@ app.controller('BookListController', function ($scope) {
     $scope.todo_list = $scope.empty_todo_list;
     $scope.completed_list = [];
     $scope.isbn = "";
+    $scope.mock_isbn = "9789862168370";  //賈伯斯傳
 
     // -----------------
 
@@ -138,7 +139,8 @@ app.controller('BookListController', function ($scope) {
     };
 
     $scope.add = function (_callback) {
-        var _isbn = parseInt($.trim($('[name="isbn"]').val()), 10);
+        var _isbn = $.trim($('[name="isbn"]').val());
+        console.log(_isbn);
         $scope.has_item(_isbn, function (_result, _item) {
             //console.log("_.add" + _result);
             if (_result === false) {
@@ -246,6 +248,45 @@ app.controller('BookListController', function ($scope) {
             });
         });
     };
+    
+    $scope.search = function () {
+        $scope.add();
+    };
+    
+    $scope.scan_barcode = function () {
+    
+    var _search = function (_isbn) {
+        $scope.isbn = _isbn;
+        $scope.$digest();
+        $scope.add();
+    };
+    
+    if (typeof (cordova) !== "undefined") {
+        cordova.plugins.barcodeScanner.scan(
+                function (_result) {
+                    _search(_result.text);
+                },
+                function (error) {
+                    ons.notification.alert({
+                        message: "Scanning failed: " + error,
+                        // or messageHTML: '<div>Message in HTML</div>',
+                        title: '錯誤',
+                        buttonLabel: 'OK'
+                    });
+                }
+        );
+    }
+    else {
+        
+//        ons.notification.alert({
+//            message: '只有手機才能使用掃描條碼功能',
+//            // or messageHTML: '<div>Message in HTML</div>',
+//            title: '錯誤',
+//            buttonLabel: 'OK'
+//        });
+        
+    }
+};
 
     // -------------------
 
