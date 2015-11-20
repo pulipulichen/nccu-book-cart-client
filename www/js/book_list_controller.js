@@ -14,8 +14,9 @@ app.controller('book_list_controller', function ($scope) {
 
     // 初始化資料庫
     DB.open_db();
-    //DB.drop_table("list");
+    DB.drop_table("list");
     DB.create_table("list", [
+        "author",
         "title",
         "call_number",
         "isbn",
@@ -208,15 +209,22 @@ app.controller('book_list_controller', function ($scope) {
         return false;
     };
 
-    $scope.has_item_notify = function (_item, _callback) {
+    $scope.has_item_notify = function (_item_list, _callback) {
         //console.log(_item);
-        ons.notification.alert(_item.title + " 已經有資料了");
-
-        if (_item.checked === 1) {
-            $scope.load_completed_list(function () {
-                app.navi.replacePage("completed_list.html", {animation: 'none'});
-            });
+        var _title = "";
+        for (var _i = 0; _i < _item_list.length; _i++) {
+            if (_title !== "") {
+                _title = _title + "、";
+            }
+            _title = _title + _item_list[_i];
         }
+        ons.notification.alert(_title + " 已經有資料了。");
+
+//        if (_item.checked === 1) {
+//            $scope.load_completed_list(function () {
+//                app.navi.replacePage("completed_list.html", {animation: 'none'});
+//            });
+//        }
 
         _trigger_callback(_callback);
     };
@@ -225,35 +233,62 @@ app.controller('book_list_controller', function ($scope) {
         //console.log(_isbn);
         $.get(CONFIG.proxy_url, {
             "isbn": _isbn
-        }, function (_data) {
+        }, function (_data_list) {
+            
+            if (typeof(_data_list.error) === "string") {
+                ons.notification.alert(_data_list.error);
+                _trigger_callback(_callback);
+                return;
+            }
+            
             //console.log(_data);
+            var _has_item_list = [];
 
-            var _title = _data.title;
-            var _call_number = _data.call_number;
-            var _isbn = _data.isbn;
-            var _location = _data.location;
-            var _checked = 0;
-            var _create_timestamp = (new Date()).getTime();
-            var _update_timestamp = _create_timestamp;
+            var _loop = function (_i) {
+                if (_i < _data_list.length) {
+                    var _data = _data_list[_i];
+                    
+                    var _author = $.trim(_data.author);
+                    var _title = $.trim(_data.title);
+                    var _call_number = $.trim(_data.call_number);
+                    var _isbn = _data.isbn;
+                    var _location = $.trim(_data.location);
+                    var _checked = 0;
+                    var _create_timestamp = (new Date()).getTime();
+                    var _update_timestamp = _create_timestamp;
 
-            $scope.has_item(_isbn, function (_result, _item) {
-                if (_result === false) {
-                    DB.exec('INSERT INTO list '
-                            + '(title, call_number, isbn, location, checked'
-                            + ', create_timestamp, update_timestamp) '
-                            + 'VALUES ("' + _title + '", "' + _call_number + '", "' + _isbn
-                            + '", "' + _location + '", ' + _checked + ', "' + _create_timestamp
-                            + '", "' + _update_timestamp + '")',
-                            function () {
-                                _trigger_callback(_callback);
-                            });
+                    $scope.has_item(_isbn, function (_result, _item) {
+                        if (_result === false) {
+                            DB.exec('INSERT INTO list '
+                                    + '(author, title, call_number, isbn, location, checked'
+                                    + ', create_timestamp, update_timestamp) '
+                                    + 'VALUES ("' + _author + '", "' + _title + '", "' + _call_number + '", "' + _isbn
+                                    + '", "' + _location + '", ' + _checked + ', "' + _create_timestamp
+                                    + '", "' + _update_timestamp + '")',
+                                    function () {
+                                        _i++;
+                                        _loop(_i);
+                                    });
+                        }
+                        else {
+                            //$scope.has_item_notify(_item, _callback);
+                            _has_item_list.push(_item);
+                            _i++;
+                            _loop(_i);
+                        }
+                    });
                 }
                 else {
-                    $scope.has_item_notify(_item, _callback);
+                    if (_has_item_list.length > 0) {
+                        $scope.has_item_notify(_has_item_list, _callback);
+                    }
+                    else {
+                        _trigger_callback(_callback);
+                    }
                 }
-            });
+            };
 
-
+            _loop(0);
         });
     };
 

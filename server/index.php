@@ -37,10 +37,82 @@ header('Content-Type: application/json; charset=utf-8');
 // ISBN=9789862168370
 // http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=9789862168370&searchscope=5&sortdropdown=-&SORT=DZ&extended=0&SUBMIT=%E6%9F%A5%E8%A9%A2&availlim=1&searchlimits=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY
 
-$isbn = 9789862168370;
-$url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" . $isbn .  "&searchscope=5&sortdropdown=-&SORT=DZ&extended=0&SUBMIT=%E6%9F%A5%E8%A9%A2&availlim=1&searchlimits=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
-//$content = file_get_contents($url);
-$content = file_get_contents("found_book_available.html");
+//$isbn = 9789862168370;
+
+if (isset($_GET["isbn"]) === FALSE) {
+    echo json_encode(array(
+        "error" => "NO_ISBN"
+    ), JSON_UNESCAPED_UNICODE);
+    exit();
+}
+
+$url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" . $_GET["isbn"] .  "&searchscope=5&sortdropdown=-&SORT=DZ&extended=0&SUBMIT=%E6%9F%A5%E8%A9%A2&availlim=1&searchlimits=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
+//$url = "query_test/isbn_not_found.html";
+//$url = "query_test/found_book_available.html";
+//$url = "query_test/found_book_multi_available.html";
+//$url = "query_test/found_book_not_available.html";
+
+
+//$content = file_get_contents("found_book_available.html");
+
+require 'lib/querypath/src/qp.php';
+
+// ---------------------------------------------
+// found_book_available
+// ---------------------------------------------
+
+if (htmlqp($url, '.msg td:contains("無查獲符合查詢條件的館藏;相近 國際標準號碼 是:")')->size() > 0) {
+    $data = array(
+        "error" => "NOT_FOUND"
+    );
+}   //if (htmlqp($url, '.msg td:contains("無查獲符合查詢條件的館藏;相近 國際標準號碼 是:")')->size() > 0) {
+else if (htmlqp($url, '.bibItemsEntry td:contains("可流通")')->size() > 0) {
+
+    $data = array();
+    
+$author = htmlqp($url, '.bibInfoLabel:contains("作者")')->eq(0)->next()->text();
+//echo $author;
+
+$full_title = htmlqp($url, '.bibInfoLabel:contains("題名/作者")')->eq(0)->next()->find("strong:first")->text();
+$title = substr($full_title, 0, strpos($full_title, " / "));
+$title = trim($title);
+//echo $title;
+
+$isbn = htmlqp($url, '.bibInfoLabel:contains("國際標準書號")')->eq(0)->next()->text();
+$isbn = substr($isbn, 0, strpos($isbn, " : "));
+$isbn = trim($isbn);
+$isbn = intval($isbn);
+
+$available_td_list = htmlqp($url, '.bibItemsEntry td:contains("可流通")');
+for ($i = 0; $i < $available_td_list->size(); $i++) {
+    $call_number = $available_td_list->eq($i)->prev()->text();
+    $call_number = trim($call_number);
+
+    $location = $available_td_list->eq($i)->prev()->prev()->text();
+    $location = trim($location);
+    array_push($data, array(
+        "title" => $title,
+        "call_number" => $call_number,
+        "location" => $location,
+        "isbn" => $isbn
+    ));
+}
+
+}   // if (htmlqp($url, '.bibItemsEntry td:contains("可流通")')->size() > 0) {
+else {
+    $full_title = htmlqp($url, '.bibInfoLabel:contains("題名/作者")')->eq(0)->next()->find("strong:first")->text();
+    $title = substr($full_title, 0, strpos($full_title, " / "));
+    $title = trim($title);
+    
+    $data = array(
+        "error" => "NOT_AVAILABLE",
+        "title" => $title
+    );
+}
+
+echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+
 //
 //function get_field($content, $header, $footer = NULL, $header_padding = "") {
 //    //echo $content;
