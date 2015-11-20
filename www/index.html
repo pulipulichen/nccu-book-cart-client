@@ -28,16 +28,19 @@
         <!-- <script src="cordova.js"></script> -->
         <script src="scripts/cordova.index.js"></script>
         <script src="js/onsen-init.js"></script>
+        
+        <script src="js/database_utils.js"></script>
+        <script src="js/ons_utils.js"></script>
         <title>{{ 'TITLE' | translate }}</title>
         
 
     </head>
 
-    <body>
+    <body ng-controller="BookListController">
     
     <ons-navigator var="app.navi" page="scan.html"></ons-navigator> 
 
-    <script src="js/list.js"></script>
+    <script src="js/BookListController.js"></script>
     <script src="js/scan_barcode.js"></script>
 
 </body>

@@ -1,6 +1,6 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="cht_eip_20151116.pulipuli.blogspot.tw" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="book_list_20151120.pulipuli.blogspot.tw" version="1.0.0">
 
-    <name>CHT-EIP</name>
+    <name>政大借書籃</name>
     <description>
         使用Onsen UI製作行動版網頁的展示，包含條碼掃描的功能。
         詳細原始碼可以到 https://github.com/pulipulichen/cht-eip 下載。

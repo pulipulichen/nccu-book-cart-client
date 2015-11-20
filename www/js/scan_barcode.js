@@ -3,6 +3,7 @@ scan_barcode = function () {
         cordova.plugins.barcodeScanner.scan(
                 function (result) {
                     $(".demo-search-input").val(result.text);
+                    $(".demo-search-input").parents("form").submit();
                 },
                 function (error) {
                     ons.notification.alert({

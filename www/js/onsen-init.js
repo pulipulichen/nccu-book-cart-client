@@ -5,8 +5,4 @@ app.config(function ($translateProvider) {
         prefix: 'i18n/',
         suffix: '.json'
     });
-    
-    $.getJSON("config.json", function (_config) {
-        CONFIG = _config;
-    });
 });

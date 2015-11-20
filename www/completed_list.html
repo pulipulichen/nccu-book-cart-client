@@ -1,0 +1,50 @@
+
+<ons-page id="list_html">
+
+    <ons-toolbar>
+        <div class="center">{{ 'COMPLETED_LIST' | translate}}</div>
+        <div class="right" ng-click="clear_list()">
+            <ons-toolbar-button><i class="icon ion-close-circled"></i>
+            </ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+
+    <!-- --------------------------------------------------------- -->
+
+    <ons-list>
+            <ons-list-item modifier="tappable" 
+                    ng-repeat="item in completed_list" ng-click="undo_item(item.id)" ng-class="item_id_{{item.id}}">
+                <label class="checkbox checkbox--list-item">
+                    <input type="checkbox" checked="checked" />
+                <div class="checkbox__checkmark checkbox--list-item__checkmark">
+                </div>
+                {{item.title}}
+                {{item.call_number}}
+                {{item.update_timestamp}}
+                {{item.id}}
+                {{item.hover}}
+                </label>
+            </ons-list-item>
+    </ons-list>
+
+    <!-- --------------------------------------------------------- -->
+
+    <div class="tab-bar">
+        <label class="tab-bar__item" ng-click="app.navi.replacePage('scan.html', {animation: 'none'});load_todo_list()">
+            <input type="radio" name="tab-bar-main" />
+            <button class="tab-bar__button">
+                <i class="tab-bar__icon ion-compose"></i>
+                <div class="tab-bar__label">{{ "SCAN_BARCODE" | translate}}</div>
+            </button>
+        </label>
+
+        <label class="tab-bar__item">
+            <input type="radio" name="tab-bar-main" checked="checked" />
+            <button class="tab-bar__button">
+                <i class="tab-bar__icon ion-ios-list-outline"></i>
+                <div class="tab-bar__label">{{ "BOOK_LIST" | translate}}</div>
+            </button>
+        </label>
+    </div>
+
+</ons-page>

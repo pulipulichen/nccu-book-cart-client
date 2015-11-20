@@ -134,3 +134,7 @@ input[type=email], input[type=password] {
 #scan_barcode {
     width: 100%;
 }
+
+ons-list-item.location {
+    background-color: #CCC;
+}
