@@ -2,8 +2,8 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="pulipuli.blogspot.tw.nccu_book_cart" version="1.0.0">
   <name>NCCU Book Cart</name>
   <description>
-            使用Onsen UI製作行動版網頁的展示，包含條碼掃描的功能。
-        詳細原始碼可以到 https://github.com/pulipulichen/cht-eip 下載。
+    還在用筆抄要借的書嗎？政大借書籃讓您記錄在APP上，方便查詢。還可以直接掃描條碼來記錄喔！
+    本APP的原始碼開源於 https://github.com/pulipulichen/book-list
   </description>
   <author href="http://pulipuli.blogspot.tw" email="pulipuli.chen@gmail.com">布丁布丁吃布丁</author>
   

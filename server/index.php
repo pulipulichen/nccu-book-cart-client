@@ -52,7 +52,7 @@ sleep($CONFIG["request_wait_sec"]);
 $url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" . $isbn  . "&searchscope=5&sortdropdown=-&SORT=DZ&extended=0&SUBMIT=%E6%9F%A5%E8%A9%A2&availlim=1&searchlimits=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
 
 // 測試檔案
-$url = "query_test/found_book_available.html";
+//$url = "query_test/found_book_available.html";
 //$url = "query_test/found_book_multi_available.html";
 
 //$url = "query_test/isbn_not_found.html";
