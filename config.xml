@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="book_list_20151120.pulipuli.blogspot.tw" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="pulipuli.blogspot.tw.nccu_book_cart" version="1.0.0">
   <name>NCCU Book Cart</name>
   <description>
-        &#x8A18;&#x4E0B;&#x60A8;&#x8981;&#x501F;&#x7684;&#x66F8;&#xFF0C;&#x6307;&#x5F15;&#x60A8;&#x53BB;&#x66F8;&#x67B6;&#x4E0A;&#x627E;&#x5230;&#x66F8;&#x5427;&#x3002;
-        &#x8A73;&#x7D30;&#x539F;&#x59CB;&#x78BC;&#x53EF;&#x4EE5;&#x5230; https://github.com/pulipulichen/book-list &#x4E0B;&#x8F09;&#x3002;
-    </description>
-  <author href="http://pulipuli.blogspot.tw" email="pulipuli.chen@gmail.com">&#x5E03;&#x4E01;&#x5E03;&#x4E01;&#x5403;&#x5E03;&#x4E01;</author>
+            使用Onsen UI製作行動版網頁的展示，包含條碼掃描的功能。
+        詳細原始碼可以到 https://github.com/pulipulichen/cht-eip 下載。
+  </description>
+  <author href="http://pulipuli.blogspot.tw" email="pulipuli.chen@gmail.com">布丁布丁吃布丁</author>
   
   <!--  allows access to any external resource. -->
   <access origin="*"/>
@@ -15,6 +15,7 @@
   
   <preference name="phonegap-version" value="3.7.0"/>
   <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
+  <plugin name="org.tt.plugin.tts" spec="1" source="pgb" />
 
   <!--
   <gap:plugin name="de.appplant.cordova.plugin.local-notification"/>
