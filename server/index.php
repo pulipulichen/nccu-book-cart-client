@@ -121,23 +121,27 @@ else {
 
         $location = $available_td_list->eq($i)->prev()->prev()->text();
         $location = trim($location);
-        array_push($data, array(
-            "title" => urlencode($title),
-            "call_number" => url($call_number),
-            "location" => url($location),
-            "isbn" => url($isbn)
-        ));
-        
-        $data = array(
-            "error"=> "11212"
+        $data[] = array(
+//            "title" => urlencode($title),
+//            "call_number" => urlencode($call_number),
+//            "location" => urlencode($location),
+//            "isbn" => urlencode($isbn)
+            "title" => $title,
+            "call_number" => $call_number,
+            "location" => $location,
+            "isbn" => $isbn
         );
     }
+    
+//    $data = array(
+//        "error" => "NOT_FOUND"
+//    );
 }   // if (htmlqp($url, '.bibItemsEntry td:contains("可流通")')->size() > 0) {
 
 // ---------------------------
 // 轉換
-//$json = json_encode($data, JSON_UNESCAPED_UNICODE);
-$json = json_encode($data);
+$json = json_encode($data, JSON_UNESCAPED_UNICODE);
+//$json = json_encode($data);
 
 
 // ---------------------------
