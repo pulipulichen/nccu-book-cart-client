@@ -1,9 +1,13 @@
-app.controller('book_list_controller', function ($scope) {
+var CONFIG;
+$.getJSON("config.json", function (_config) {
+    CONFIG = _config;
+    
+    
+});
 
-    var CONFIG;
-    $.getJSON("config.json", function (_config) {
-        CONFIG = _config;
-    });
+app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $filter) {
+
+    
 
     var _trigger_callback = function (_callback) {
         if (typeof (_callback) === "function")
@@ -14,7 +18,11 @@ app.controller('book_list_controller', function ($scope) {
 
     // 初始化資料庫
     DB.open_db();
-    //DB.drop_table("list");
+    
+    //if (CONFIG.test_mode === true) {
+    //    DB.drop_table("list");
+    //}
+    
     DB.create_table("list", [
         "author",
         "title",
@@ -56,23 +64,23 @@ app.controller('book_list_controller', function ($scope) {
     $scope.mock_isbn = "9789862168370";  //賈伯斯傳
 
     $scope.location_image = {
-        "社資二樓政大論文區": "img/ssic_2f_s.jpg",
+        "社資二樓政大論文區": "img/ssic_2f_s.png",
         
-        "總圖附件": "img/ccl_cht_1f.jpg",
-        "總圖三樓中文圖書區": "img/ccl_cht_3f.jpg",
-        "總圖三樓新書區": "img/ccl_cht_3f.jpg",
-        "總圖四樓西文圖書區": "img/ccl_cht_4f.jpg",
-        "總圖四樓新書區": "img/ccl_cht_4f.jpg",
+        "總圖附件": "img/ccl_cht_1f.png",
+        "總圖三樓中文圖書區": "img/ccl_cht_3f.png",
+        "總圖三樓新書區": "img/ccl_cht_3f.png",
+        "總圖四樓西文圖書區": "img/ccl_cht_4f.png",
+        "總圖四樓新書區": "img/ccl_cht_4f.png",
         
-        "綜圖一樓中文新書區": "img/cclsl_cht_1f.jpg",
-        "綜圖二樓西文新書區": "img/cclsl_cht_2f.jpg",
-        "綜圖B1中文": "img/cclsl_cht_b1.jpg",
-        "綜圖2F西文": "img/cclsl_cht_2f.jpg",
+        "綜圖一樓中文新書區": "img/cclsl_cht_1f.png",
+        "綜圖二樓西文新書區": "img/cclsl_cht_2f.png",
+        "綜圖B1中文": "img/cclsl_cht_b1.png",
+        "綜圖2F西文": "img/cclsl_cht_2f.png",
         
-        "商圖": "img/cbl_cht.jpg",
-        "商圖附件": "img/cbl_cht.jpg",
+        "商圖": "img/cbl_cht.png",
+        "商圖附件": "img/cbl_cht.png",
         
-        "傳圖": "img/cjl_cht.jpg"
+        "傳圖": "img/cjl_cht.png"
     };
     $scope.map_title = "";
     $scope.map_src = "";
@@ -176,7 +184,8 @@ app.controller('book_list_controller', function ($scope) {
     
     $scope.clear_todo_list = function (_callback) {
         ons.notification.confirm({
-            message: "確定要清空借書清單嗎？",
+            //message: $translate("TODO_LIST_EMPTY_CONFIRM"),
+            message: $filter('translate')('TODO_LIST_EMPTY_CONFIRM'),
             callback: function (_answer) {
                 //console.log(_answer);
                 if (_answer === 1) {
@@ -233,13 +242,17 @@ app.controller('book_list_controller', function ($scope) {
     };
 
     $scope.has_item_notify = function (_item_list, _callback) {
-        //console.log(_item);
+        //console.log("has_item_notify");
+        //console.log(_item_list);
+        if (typeof(_item_list.length) !== "number") {
+            _item_list = [_item_list];
+        }
         var _title = "";
         for (var _i = 0; _i < _item_list.length; _i++) {
             if (_title !== "") {
                 _title = _title + "、";
             }
-            _title = _title + _item_list[_i];
+            _title = _title + _item_list[_i].title;
         }
         ons.notification.alert(_title + " 已經有資料了。");
 
@@ -254,11 +267,13 @@ app.controller('book_list_controller', function ($scope) {
 
     $scope.request_add = function (_isbn, _callback) {
         //console.log(_isbn);
+        modal.show();
         $.get(CONFIG.proxy_url, {
             "isbn": _isbn
         }, function (_data_list) {
             
             if (typeof(_data_list.error) === "string") {
+                modal.hide();
                 ons.notification.alert(_data_list.error);
                 _trigger_callback(_callback);
                 return;
@@ -302,6 +317,7 @@ app.controller('book_list_controller', function ($scope) {
                     });
                 }
                 else {
+                    modal.hide();
                     if (_has_item_list.length > 0) {
                         $scope.has_item_notify(_has_item_list, _callback);
                     }
@@ -397,8 +413,52 @@ app.controller('book_list_controller', function ($scope) {
         }
     };
 
+    $scope.presplit = function () {
+        $("#split").addClass("split");
+    };
+
+    $scope.precollapse = function () {
+        $("#split").removeClass("split");
+    };
+
+    $scope.menu_open = function () {
+        //$(".onsen-split-view__secondary").css({
+        //    "display": "block",
+        //    "position": "absolute",
+        //    "width": "200px",
+        //    "left": "0px",
+        //    "z-index": "3",
+        //    "opacity": "1"
+        //});
+        //$(".onsen-split-view__secondary").animate({
+        //    left: "0"
+        //}, 1000000, "ease-out");
+        $(".onsen-sliding-menu__main").addClass("menu-open");
+    };
+
+    $scope.menu_close = function () {
+        //$(".onsen-split-view__secondary").css({
+        //    "display": "none"
+        //})
+        $(".onsen-sliding-menu__main").removeClass("menu-open");
+    };
+
+    $scope.exit_app = function () {
+        if (typeof(cordova) !== "undefined") {
+            navigator.app.exitApp();
+        }
+        else {
+            window.close();
+        }
+    };
+
     // -------------------
 
+    // 初始化動作，很重要
+    if (ons.platform.isWebView()) {
+        $("body").addClass("web-view");
+    }
+    
     ons.ready(function () {
         //console.log("ready");
         $scope.load_todo_list(function () {
@@ -408,6 +468,29 @@ app.controller('book_list_controller', function ($scope) {
             // 要做這件事情才能夠更新畫面
             //$scope.$digest();
         });
+        
+
+        var _setup_menu_swipeable = function () {
+            var _menu_swipeable = true;
+            var _set_menu_swipeable = function() {
+              // This will execute whenever the window is resized
+              //$(window).height(); // New height
+              var _width = $(window).width(); // New width
+              if (_width > 700 && _menu_swipeable === true) {
+                _menu_swipeable = false
+            app.menu.setSwipeable(false);
+              }
+              else if (_width < 701 && _menu_swipeable === false) {
+                _menu_swipeable = true;
+                app.menu.setSwipeable(true);
+              }
+            };
+            $(window).resize(_set_menu_swipeable);
+            _set_menu_swipeable();
+        };
+        _setup_menu_swipeable();
+            
     });
 
-});
+}]);
+

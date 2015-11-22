@@ -22,27 +22,62 @@
         <link rel="stylesheet" href="lib/angular/angular-csp.css" />
 
         <!-- --------------- App init --------------- -->
-        <link rel="stylesheet" href="css/onsen-css-components-default.css" />
+        <link rel="stylesheet" href="css/onsen-css-components.min.css" />
+        
+        <link rel="stylesheet" href="css/onsenui.css" />
+        <link rel="stylesheet" href="css/onsen-css-components.css" />
         <link rel="stylesheet" href="css/myapp.css" />
         <!-- Cordova reference -->
         <script src="js/onsen_init.js"></script>
-        
+
         <script src="js/database_utils.js"></script>
         <script src="js/ons_utils.js"></script>
         <title>{{ 'TITLE' | translate }}</title>
-        
+
 
     </head>
 
     <body ng-controller="book_list_controller">
-    
-    <ons-navigator var="app.navi" page="scan.html"></ons-navigator> 
 
+    <div ons-loading-placeholder="menu" style="text-align:center;">
+        <img src="img/loading.svg" style="position:fixed;top: calc(50% - 60px);left: calc(50% - 60px)" /> 
+    </div>
+
+
+    <ons-modal var="modal" class="now-loading-modal">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+    </ons-modal>
+
+<!--
+<ons-split-view
+    var="app" 
+  secondary-page="menu.html"
+  main-page="main.html"
+  main-page-width="70%"
+  collapse="portrait"
+  id="split">
+</ons-split-view>
+</div>
+
+<div ons-if-orientation="portrait">
+-->
+  <ons-sliding-menu id="menu" var="app.menu" 
+  main-page="main" menu-page="menu.html" max-slide-distance="200px" 
+  type="reveal" side="left" ons-preopen="menu_open()" ons-preclose="menu_close()" ></ons-sliding-menu>
+
+
+    <ons-template id="main">
+        <ons-navigator var="app.navi" page="main.html"></ons-navigator> 
+    </ons-template>
+<!--
+</div>
+-->
+
+    
     <!-- ---------------------------------------- -->
     <script src="js/book_list_controller.js"></script>
 
     <script src="cordova.js"></script>
-    <script src="scripts/cordova.index.js"></script>
-        
+    
 </body>
 </html>

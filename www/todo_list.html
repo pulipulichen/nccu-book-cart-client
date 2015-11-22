@@ -2,6 +2,15 @@
 <ons-page id="welcome_html">
 
     <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button ng-click="app.menu.toggleMenu()">
+                <span class="toolbar-button--quiet navigation-bar__line-height" >
+                    <i class="ion-navicon"
+                       style="font-size:32px; vertical-align:-6px;"></i>
+                </span>
+            </ons-toolbar-button>
+        </div>
+
         <div class="center">{{ 'TITLE' | translate}}</div>
 
         <div class="right" ng-click="clear_todo_list()">
@@ -21,7 +30,7 @@
             <form id="scan_barcode" ng-submit="add();">
                 <input type="search" class="search-input" name="isbn"
                        value="{{isbn}}"
-                       placeholder="Search...">
+                       placeholder="輸入ISBN查詢...">
             </form>
         </ons-col>
 
@@ -43,13 +52,13 @@
             <div class="list-item-right">    
             </div>
         </ons-list-item>
-        
+
         <ons-list-item modifier="tappable" 
                        ng-repeat="item in location.items" ng-click="complete_item(item.id)"
                        class="list-item-container">
-            
-        <label class="checkbox checkbox--list-item">
-            <input type="checkbox" />
+
+            <label class="checkbox checkbox--list-item">
+                <input type="checkbox" />
                 <div class="checkbox__checkmark checkbox--list-item__checkmark">
                 </div>
                 <span class="title" style="font-weight: bold;">{{item.title}}</span>
@@ -60,10 +69,9 @@
         </ons-list-item>
     </ons-list>
 
-
-
     <!-- ------------------------------------------- -->
 
+    <!--
     <div class="tab-bar">
         <label class="tab-bar__item">
             <input type="radio" name="tab-bar-main" checked="checked" />
@@ -82,5 +90,6 @@
             </button>
         </label>
     </div>
+    -->
 
 </ons-page>

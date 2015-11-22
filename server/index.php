@@ -1,10 +1,10 @@
 <?php
 
 include_once 'config.php';
+include_once 'utils.php';
+include_once 'lib/rb.config.php';
 
 header('Content-Type: application/json; charset=utf-8');
-
-include_once 'lib/rb.config.php';
 
 
 //$isbn = 9789862168370;
@@ -29,7 +29,7 @@ $result = R::find("cache_query_result", 'isbn = ? AND timestamp > ?'
         ));
 
 //echo time()-100;
-if (count($result) > 0) {
+if (false && count($result) > 0) {
     $json = "";
     foreach ($result as $r) {
         $json = "" . $r->json;
@@ -46,14 +46,18 @@ if (count($result) > 0) {
 // ----------------------
 // 準備開始查詢
 
+// 不管什麼查詢，都先睡3秒鐘，以免過渡頻繁的查詢
+sleep($CONFIG["request_wait_sec"]);
+
 $url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" . $isbn  . "&searchscope=5&sortdropdown=-&SORT=DZ&extended=0&SUBMIT=%E6%9F%A5%E8%A9%A2&availlim=1&searchlimits=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
 
 // 測試檔案
-//$url = "query_test/isbn_not_found.html";
-//$url = "query_test/found_book_available.html";
+$url = "query_test/found_book_available.html";
 //$url = "query_test/found_book_multi_available.html";
+
+//$url = "query_test/isbn_not_found.html";
 //$url = "query_test/found_book_not_available.html";
-$content = file_get_contents($url);
+//$content = file_get_contents($url);
 //echo $content;
 
 //exit();
@@ -118,17 +122,23 @@ else {
         $location = $available_td_list->eq($i)->prev()->prev()->text();
         $location = trim($location);
         array_push($data, array(
-            "title" => $title,
-            "call_number" => $call_number,
-            "location" => $location,
-            "isbn" => $isbn
+            "title" => urlencode($title),
+            "call_number" => url($call_number),
+            "location" => url($location),
+            "isbn" => url($isbn)
         ));
+        
+        $data = array(
+            "error"=> "11212"
+        );
     }
 }   // if (htmlqp($url, '.bibItemsEntry td:contains("可流通")')->size() > 0) {
 
 // ---------------------------
 // 轉換
-$json = json_encode($data, JSON_UNESCAPED_UNICODE);
+//$json = json_encode($data, JSON_UNESCAPED_UNICODE);
+$json = json_encode($data);
+
 
 // ---------------------------
 // 備份快取資料

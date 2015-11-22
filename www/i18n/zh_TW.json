@@ -6,6 +6,9 @@
     "SEARCH": "搜尋",
     
     "BOOK_LIST": "借書清單",
+
+    "TODO_LIST": "借書清單",
+    "TODO_LIST_EMPTY_CONFIRM": "您確定要清空借書清單嗎？",
     
     "COMPLETED_LIST": "歷史清單"
 }

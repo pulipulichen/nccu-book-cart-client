@@ -1,0 +1,73 @@
+
+<ons-page id="about_html" on-device-backbutton="app.menu.open()">
+
+
+    <ons-toolbar>
+        <div class="left">
+            <!--
+            <ons-toolbar-button ng-click="app.menu.toggleMenu()">
+            -->
+            <ons-toolbar-button ng-click="app.menu.open()" class="menu-open">
+            
+                <span class="toolbar-button--quiet navigation-bar__line-height" >
+                    <i class="ion-navicon"
+                       style="font-size:32px; vertical-align:-6px;"></i>
+                </span>
+            </ons-toolbar-button>
+        </div>
+        <div class="center">關於作者</div>
+        
+    </ons-toolbar>
+
+    <!-- --------------------------------------------------------- -->
+
+    <div class="profile-card">
+
+        <img src="img/pudding-icon.gif" class="profile-image"/>
+        <div class="profile-name">布丁布丁吃布丁</div>
+        <div class="profile-id">Tim (Puudding)</div>
+        <div class="profile-desc">國立政治大學圖書資訊與檔案學研究所博士生，興趣是用程式來讓生活與工作更加便利，但是也應該寫寫論文才能夠順利畢業。</div>
+
+    </div>
+
+      <ons-list modifier="inset" style="margin-top: 10px">
+
+        <ons-list-item modifier="chevron" onclick="location.href='mailto:pulipuli.chen@gmail.com?subject=[NCCU-BOOK-CART]'">
+            <ons-icon icon="ion-android-mail" size="20px"></ons-icon>
+          提出建議
+
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="window.open('http://pulipuli.blogspot.tw', 'blogger')">
+        <ons-icon icon="ion-social-rss" size="20px"></ons-icon>
+          參觀我的Blog
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="$(this).find('form').submit();">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="paypal">
+
+<ons-icon icon="ion-card" size="20px"></ons-icon>
+    助我畢業
+
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/zh_TW/TW/i/btn/btn_buynowCC_LG_wCUP.gif" border="0" name="submit" alt="PayPal － 更安全、更簡單的線上付款方式！" style="display:none;">
+<img alt="" border="0" src="https://www.paypalobjects.com/zh_TW/i/scr/pixel.gif" width="1" height="1">
+</form>
+        </ons-list-item>
+
+      </ons-list>
+
+    <!--
+    https://www.paypal.com/tw/cgi-bin/webscr?cmd=_profile-summary&nav=0%2e4
+
+<input type="hidden" name="charset" value="utf-8">
+    -->
+    <ons-row>
+
+
+
+    </ons-row>
+
+</ons-page>

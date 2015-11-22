@@ -1,0 +1,114 @@
+
+<ons-page id="main_html" on-device-backbutton="app.menu.open()">
+
+    <ons-toolbar>
+        <div class="left">
+            <!--
+            <ons-toolbar-button ng-click="app.menu.toggleMenu()">
+            -->
+            <ons-toolbar-button ng-click="app.menu.open()" class="menu-open">
+            
+                <span class="toolbar-button--quiet navigation-bar__line-height" >
+                    <i class="ion-navicon"
+                       style="font-size:32px; vertical-align:-6px;"></i>
+                </span>
+            </ons-toolbar-button>
+        </div>
+
+        <div class="center">{{ 'TITLE' | translate}}</div>
+
+        <div class="right" ng-click="clear_todo_list()">
+            <ons-toolbar-button>
+                <i class="icon ion-close-circled"></i>
+            </ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <iframe src="http://www.pulipuli.tk/book-list/server/info.php"></iframe>
+
+<!--
+    <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
+        <ons-button id="search_barcode_button" modifier="large--cta" ng-click="scan_barcode()">{{ 'SCAN_BARCODE' | translate }}</ons-button>
+    </ons-row>
+-->
+
+            <form id="scan_barcode" ng-submit="add();">
+    <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
+
+        <ons-col width="120px" ng-click="scan_barcode()">
+        <ons-button id="search_barcode_button" modifier="cta">
+
+      <ons-icon icon="ion-qr-scanner" ></ons-icon>
+        {{ 'SCAN_BARCODE' | translate }}</ons-button>
+    </ons-col>
+        <ons-col>
+                <input type="search" class="search-input" id="isbn" name="isbn"
+                       value="{{isbn}}"
+                       placeholder="輸入ISBN查詢..." >
+                       <!--autofocus--> 
+        </ons-col>
+
+        <ons-col width="40px" ng-click="search()">
+            <ons-button modifier="cta">
+                <ons-icon icon="fa-search"></ons-icon>
+            </ons-button>
+        </ons-col>
+
+    </ons-row>
+            </form>
+
+
+    <ons-list ng-repeat="location in todo_list">
+        <ons-list-item class="location" modifier="chevron" class="list-item-container"  
+                       ng-click="open_map(location.location)" ng-show="location.location != ''">
+            <div class="list-item-left">
+                {{location.location}}
+            </div>
+            <div class="list-item-right">    
+            </div>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable" 
+                       ng-repeat="item in location.items" ng-click="complete_item(item.id)"
+                       class="list-item-container">
+
+            <label class="checkbox checkbox--list-item">
+                <input type="checkbox" />
+                <div class="checkbox__checkmark checkbox--list-item__checkmark">
+                </div>
+                <span class="title" style="font-weight: bold;">{{item.title}}</span>
+                <span class="call_number" style="font-size: smaller;color: orange;">{{item.call_number}}</span>
+                <span class="update_timestamp" style="display:none;">{{item.update_timestamp}}</span>
+                <span class="id" style="display:none;">{{item.id}}</span>
+            </label>
+        </ons-list-item>
+    </ons-list>
+
+    <!-- ------------------------------------------- -->
+
+    <!--
+    <div class="tab-bar">
+        <label class="tab-bar__item">
+            <input type="radio" name="tab-bar-main" checked="checked" />
+            <button class="tab-bar__button">
+                <i class="tab-bar__icon ion-compose"></i>
+                <div class="tab-bar__label">{{ "BOOK_LIST" | translate}}</div>
+            </button>
+        </label>
+
+        <label class="tab-bar__item" ng-click="app.navi.replacePage('completed_list.html', {animation: 'none'});
+            load_completed_list()">
+            <input type="radio" name="tab-bar-main" />
+            <button class="tab-bar__button">
+                <i class="tab-bar__icon ion-ios-list-outline"></i>
+                <div class="tab-bar__label">{{ "COMPLETED_LIST" | translate}}</div>
+            </button>
+        </label>
+    </div>
+    -->
+    <ons-fab class="fab" style="transform: scale(1);position:absolute;bottom: 25px;right:25px;">
+    <label for="isbn" class="fab__icon">
+      <ons-ripple class="ripple" style="display: block; position: absolute;"><span class="ripple__wave"></span></ons-ripple>
+      <ons-icon icon="ion-search" ></ons-icon>
+    </label></ons-fab>
+
+</ons-page>

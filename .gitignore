@@ -7,3 +7,4 @@ npm-debug.log
 myapp.*.zip
 [TRASH]/*
 cht-eip.zip
+server/book_list.sqlite
