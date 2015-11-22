@@ -1,8 +1,6 @@
 var CONFIG;
 $.getJSON("config.json", function (_config) {
     CONFIG = _config;
-    
-    
 });
 
 app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $filter) {
@@ -62,25 +60,26 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
     $scope.completed_list = [];
     $scope.isbn = "";
     $scope.mock_isbn = "9789862168370";  //賈伯斯傳
+    $scope.isbn = $scope.mock_isbn; //備用
 
     $scope.location_image = {
-        "社資二樓政大論文區": "img/ssic_2f_s.png",
+        "社資二樓政大論文區": CONFIG.proxy_url + "img/map/ssic_2f_s.png",
         
-        "總圖附件": "img/ccl_cht_1f.png",
-        "總圖三樓中文圖書區": "img/ccl_cht_3f.png",
-        "總圖三樓新書區": "img/ccl_cht_3f.png",
-        "總圖四樓西文圖書區": "img/ccl_cht_4f.png",
-        "總圖四樓新書區": "img/ccl_cht_4f.png",
+        "總圖附件": CONFIG.proxy_url + "img/map/ccl_cht_1f.png",
+        "總圖三樓中文圖書區": CONFIG.proxy_url + "img/map/ccl_cht_3f.png",
+        "總圖三樓新書區": CONFIG.proxy_url + "img/map/ccl_cht_3f.png",
+        "總圖四樓西文圖書區": CONFIG.proxy_url + "img/map/ccl_cht_4f.png",
+        "總圖四樓新書區": CONFIG.proxy_url + "img/map/ccl_cht_4f.png",
         
-        "綜圖一樓中文新書區": "img/cclsl_cht_1f.png",
-        "綜圖二樓西文新書區": "img/cclsl_cht_2f.png",
-        "綜圖B1中文": "img/cclsl_cht_b1.png",
-        "綜圖2F西文": "img/cclsl_cht_2f.png",
+        "綜圖一樓中文新書區": CONFIG.proxy_url + "img/map/cclsl_cht_1f.png",
+        "綜圖二樓西文新書區": CONFIG.proxy_url + "img/mapcclsl_cht_2f.png",
+        "綜圖B1中文": CONFIG.proxy_url + "img/map/cclsl_cht_b1.png",
+        "綜圖2F西文": CONFIG.proxy_url + "img/map/cclsl_cht_2f.png",
         
-        "商圖": "img/cbl_cht.png",
-        "商圖附件": "img/cbl_cht.png",
+        "商圖": CONFIG.proxy_url + "img/map/cbl_cht.png",
+        "商圖附件": CONFIG.proxy_url + "img/map/cbl_cht.png",
         
-        "傳圖": "img/cjl_cht.png"
+        "傳圖": CONFIG.proxy_url + "img/map/cjl_cht.png"
     };
     $scope.map_title = "";
     $scope.map_src = "";
@@ -93,7 +92,7 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
                 $scope.$digest();
                 _trigger_callback(_callback);
             });
-        })
+        });
     };
 
     $scope.load_todo_list = function (_callback) {
@@ -268,10 +267,11 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
     $scope.request_add = function (_isbn, _callback) {
         //console.log(_isbn);
         modal.show();
+        alert("request_add 1");
         $.get(CONFIG.proxy_url, {
             "isbn": _isbn
         }, function (_data_list) {
-            
+            alert("request_add 2");
             if (typeof(_data_list.error) === "string") {
                 modal.hide();
                 ons.notification.alert(_data_list.error);
@@ -282,8 +282,11 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
             //console.log(_data);
             var _has_item_list = [];
 
+            alert("request_add 3");
             var _loop = function (_i) {
+                alert("request_add loop " + _i);
                 if (_i < _data_list.length) {
+                    alert("request_add loop _data_list[_i]" + _i);
                     var _data = _data_list[_i];
                     
                     var _author = $.trim(_data.author);
@@ -295,8 +298,11 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
                     var _create_timestamp = (new Date()).getTime();
                     var _update_timestamp = _create_timestamp;
 
+                    
+                    alert("request_add [" + _i + "] 預備has_item");
                     $scope.has_item(_isbn, function (_result, _item) {
                         if (_result === false) {
+                            alert("request_add [" + _i + "] 預備DB exec");
                             DB.exec('INSERT INTO list '
                                     + '(author, title, call_number, isbn, location, checked'
                                     + ', create_timestamp, update_timestamp) '
@@ -304,12 +310,14 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
                                     + '", "' + _location + '", ' + _checked + ', "' + _create_timestamp
                                     + '", "' + _update_timestamp + '")',
                                     function () {
+                                        alert("request_add [" + _i + "] 儲存完成，準備下一輪");
                                         _i++;
                                         _loop(_i);
                                     });
                         }
                         else {
                             //$scope.has_item_notify(_item, _callback);
+                            alert("request_add [" + _i + "] 已經有資料，準備下一輪");
                             _has_item_list.push(_item);
                             _i++;
                             _loop(_i);
@@ -317,6 +325,7 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
                     });
                 }
                 else {
+                    alert("request_add [" + _i + "] 全部完成");
                     modal.hide();
                     if (_has_item_list.length > 0) {
                         $scope.has_item_notify(_has_item_list, _callback);
@@ -327,6 +336,7 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
                 }
             };
 
+            alert("request_add 4 準備loop");
             _loop(0);
         });
     };
