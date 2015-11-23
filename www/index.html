@@ -61,7 +61,7 @@
 
 
     <ons-template id="main">
-        <ons-navigator var="app.navi" page="setting.html"></ons-navigator> 
+        <ons-navigator var="app.navi" page="main.html"></ons-navigator> 
     </ons-template>
 
 
@@ -77,6 +77,9 @@
     <script src="js/app_factory_ons_utils.js"></script>
     <script src="js/app_factory_jquery.js"></script>
     <script src="js/app_ready.js"></script>
+    <script src="js/cordova_barcode_scan.js"></script>
+    <script src="js/cordova_social_share.js"></script>
+    
     <script type="text/javascript">
                 var app = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
 
@@ -111,6 +114,9 @@
 
                     _app_factory_ons_utils($scope, $filter);
                     _app_factory_jquery_utils($scope);
+                    
+                    cordova_barcode_scan($scope, $filter);
+                    cordova_social_share($scope, $filter);
                     // -----------------------------------
 
                     _app_ready($scope);

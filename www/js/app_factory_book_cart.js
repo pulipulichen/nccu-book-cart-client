@@ -344,4 +344,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
         }
     };  //$scope.scan_barcode = function () {
 
+    $scope.share_app = function () {
+        $scope.cordova_social_share("我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/");
+    };
 };
