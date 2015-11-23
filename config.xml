@@ -14,9 +14,19 @@
     <icon src="icon.png"/>
   
     <preference name="phonegap-version" value="3.7.0"/>
+    
+    <!-- 防止太多權限 -->
+    <preference name="permissions" value="none" />
+    
+    <!-- 只保留最低的權限 -->
+    <feature name="http://api.phonegap.com/1.0/network" />
+    <feature name="http://api.phonegap.com/1.0/camera" />
+    
+    <!-- 外掛 -->
     <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
     <plugin name="org.tt.plugin.tts" spec="1" source="pgb" />
     <plugin name="org.apache.cordova.inappbrowser" spec="0.3.3" source="pgb" />
+    
     <!--
       <gap:plugin name="de.appplant.cordova.plugin.local-notification"/>
     -->
