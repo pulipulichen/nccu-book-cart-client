@@ -69,7 +69,11 @@ var _app_factory_ons_view = function ($scope) {
         }
 
         $("#menu_html .menu-active").removeClass("menu-active");
-        $($event.target).addClass("menu-active");
+        var _item = $($event.target);
+        if (_item.attr("nodeName").toLowerCase() !== "ons-list-item") {
+            _item = _item.parents("ons-list-item").eq(0);
+        }
+        _item.addClass("menu-active");
     };
 
 
