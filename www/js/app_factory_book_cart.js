@@ -132,10 +132,10 @@ var _app_factory_book_cart = function ($scope, $filter) {
         if (typeof (_isbn) !== "string") {
             _isbn = $.trim($('[name="isbn"]').val());
         }
-        console.log(_isbn);
-        $scope.has_item(_isbn, function (_result, _item) {
-            //console.log("_.add" + _result);
-            if (_result === false) {
+//        console.log(_isbn);
+//        $scope.has_item(_isbn, function (_result, _item) {
+//            //console.log("_.add" + _result);
+//            if (_result === false) {
                 $scope.request_add(_isbn, function () {
                     $scope.load_todo_list(function (_data) {
                         //app.navi.pushPage('list.html');
@@ -145,11 +145,11 @@ var _app_factory_book_cart = function ($scope, $filter) {
                         $.trigger_callback(_callback);
                     });
                 });
-            }
-            else {
-                $scope.has_item_notify(_item, _callback);
-            }
-        });
+//            }
+//            else {
+//                $scope.has_item_notify(_item, _callback);
+//            }
+//        });
         return false;
     };  //$scope.add = function (_isbn, _callback) {
 
@@ -213,7 +213,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
 
                     //alert("request_add [" + _i + "] 預備has_item");
-                    $scope.has_item(_isbn, function (_result, _item) {
+                    $scope.has_item(_call_number, function (_result, _item) {
                         if (_result === false) {
                             //alert("request_add [" + _i + "] 預備DB exec");
 
@@ -255,13 +255,13 @@ var _app_factory_book_cart = function ($scope, $filter) {
         });
     };  //$scope.request_add = function (_isbn, _callback)
     
-    $scope.has_item = function (_isbn, _callback) {
-        if (_isbn === "") {
+    $scope.has_item = function (_call_number, _callback) {
+        if (_call_number === "") {
             _callback(false);
             return;
         }
-        var _i = _isbn;
-        $scope.DB.exec('SELECT title, id, checked FROM list WHERE isbn = "' + _i + '"'
+        var _i = _call_number;
+        $scope.DB.exec('SELECT title, id, checked FROM list WHERE call_number = "' + _i + '"'
                 , function (_results) {
                     //console.log("has_item result: " + _results.rows.length);
                     if (_results.rows.length > 0) {
