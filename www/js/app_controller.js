@@ -1,267 +1,71 @@
-var CONFIG;
-$.getJSON("config.json", function (_config) {
-    CONFIG = _config;
-});
+//var CONFIG;
+//$.getJSON("config.json", function (_config) {
+//    CONFIG = _config;
+//});
 
-app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $filter) {
-
-    
+app.controller('app_controller'
+    , ['$scope', 
+        '$filter', 
+        'factory_config', 
+        //'factory_db',
+        'factory_book_cart'
+    , function (
+        $scope, 
+        $filter, 
+        factory_config, 
+        //factory_db,
+        factory_book_cart) {
 
     var _trigger_callback = function (_callback) {
         if (typeof (_callback) === "function")
             _callback();
     };
-
-    // ---------------------------------------
-
-    // 初始化資料庫
-    DB.open_db();
     
-    //if (CONFIG.test_mode === true) {
-    //    DB.drop_table("list");
-    //}
-    
-    DB.create_table("list", [
-        "author",
-        "title",
-        "call_number",
-        "isbn",
-        "location",
-        "checked",
-        "create_timestamp",
-        "update_timestamp"
-    ]);
-
-    // -----------------
-
-//    $scope.data = [
-//        {
-//            "location": "總圖",
-//            "items": [
-//                {title: "A"}
-//            ]
-//        },
-//        {
-//            "location": "商圖",
-//            "items": [
-//                {title: "A"}
-//            ]
-//        }
-//        
-//    ];
-//    $scope.isbn = "121545487911";
-    $scope.empty_todo_list = [
-        {
-            "location": "",
-            "items": []
-        }
-    ];
-    $scope.todo_list = $scope.empty_todo_list;
-    $scope.completed_list = [];
-    $scope.isbn = "";
-    $scope.mock_isbn = "9789862168370";  //賈伯斯傳
-    $scope.isbn = $scope.mock_isbn; //備用
-
-    $scope.location_image = {
-        "社資二樓政大論文區": CONFIG.proxy_url + "img/map/ssic_2f_s.png",
-        
-        "總圖附件": CONFIG.proxy_url + "img/map/ccl_cht_1f.png",
-        "總圖三樓中文圖書區": CONFIG.proxy_url + "img/map/ccl_cht_3f.png",
-        "總圖三樓新書區": CONFIG.proxy_url + "img/map/ccl_cht_3f.png",
-        "總圖四樓西文圖書區": CONFIG.proxy_url + "img/map/ccl_cht_4f.png",
-        "總圖四樓新書區": CONFIG.proxy_url + "img/map/ccl_cht_4f.png",
-        
-        "綜圖一樓中文新書區": CONFIG.proxy_url + "img/map/cclsl_cht_1f.png",
-        "綜圖二樓西文新書區": CONFIG.proxy_url + "img/mapcclsl_cht_2f.png",
-        "綜圖B1中文": CONFIG.proxy_url + "img/map/cclsl_cht_b1.png",
-        "綜圖2F西文": CONFIG.proxy_url + "img/map/cclsl_cht_2f.png",
-        
-        "商圖": CONFIG.proxy_url + "img/map/cbl_cht.png",
-        "商圖附件": CONFIG.proxy_url + "img/map/cbl_cht.png",
-        
-        "傳圖": CONFIG.proxy_url + "img/map/cjl_cht.png"
+    CONFIG = {
+        "proxy_url": "http://www.pulipuli.tk/book-list/server/",
+        "test_mode": false
     };
-    $scope.map_title = "";
-    $scope.map_src = "";
+
+    //app.db.init($scope);
+    //factory_db.init();
+    _app_factory_db($scope);
+    $scope.db_init();
+    
+    // -----------------
+    factory_config.init_var($scope);
 
     // -----------------
 
     $scope.load_lists = function (_callback) {
-        $scope.load_todo_list(function () {
-            $scope.load_completed_list(function () {
-                $scope.$digest();
-                _trigger_callback(_callback);
-            });
-        });
+        return factory_book_cart.load_lists($scope, _callback);
     };
 
     $scope.load_todo_list = function (_callback) {
-
-        DB.exec("SELECT * "
-                + "FROM list WHERE checked = 0 ORDER BY update_timestamp DESC"
-                , function (_results) {
-                    var _location_list = [];
-                    var _data = [];
-
-                    for (var _i = 0; _i < _results.rows.length; _i++) {
-                        var _item = _results.rows.item(_i);
-                        //_item.id = _results.rows.item(_i).rowid;
-                        //console.log(_results.rows.item(_i));
-                        var _location = _item.location;
-                        //console.log(_location);
-                        var _location_index = $.inArray(_location, _location_list);
-                        if (_location_index === -1) {
-                            _location_list.push(_location);
-                            _location_index = _location_list.length - 1;
-                            _data.push({
-                                "location": _location,
-                                "items": []
-                            });
-                        }
-                        _data[_location_index].items.push(_item);
-                    }
-
-                    //console.log(_data.length);
-                    console.log(_data);
-                    if (_data.length === 0) {
-                        _data = $scope.empty_todo_list;
-                    }
-                    $scope.todo_list = _data;
-                    $scope.$digest();
-                    if (typeof (_callback) === "function") {
-                        _callback(_data);
-                    }
-                });
+        return factory_book_cart.load_todo_list($scope, _callback);
     };
 
     $scope.load_completed_list = function (_callback) {
-
-        DB.exec("SELECT * "
-                + "FROM list WHERE checked = 1 ORDER BY update_timestamp DESC"
-                , function (_results) {
-                    var _data = [];
-
-                    for (var _i = 0; _i < _results.rows.length; _i++) {
-                        var _item = _results.rows.item(_i);
-                        _data.push(_item);
-                    }
-                    $scope.completed_list = _data;
-                    console.log(_data.length);
-                    console.log(_data);
-                    $scope.$digest();
-                    if (typeof (_callback) === "function") {
-                        _callback(_data);
-                    }
-                });
+return factory_book_cart.load_completed_list($scope, _callback);
     };
 
     $scope.clear_list = function (_callback) {
-        ons.notification.confirm({
-            message: "確定要清空借書籃嗎？",
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    DB.empty_table("list");
-                    $scope.load_lists(_callback);
-                }
-            }
-        });
-    };
-    
-    $scope.clear_list = function (_callback) {
-        ons.notification.confirm({
-            message: "確定要清空借書籃嗎？",
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    DB.empty_table("list");
-                    $scope.load_lists(_callback);
-                }
-            }
-        });
+        return factory_book_cart.clear_list($scope, _callback);
     };
     
     $scope.clear_todo_list = function (_callback) {
-        ons.notification.confirm({
-            //message: $translate("TODO_LIST_EMPTY_CONFIRM"),
-            message: $filter('translate')('TODO_LIST_EMPTY_CONFIRM'),
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    DB.exec("DELETE FROM list WHERE checked = 0", function () {
-                        $scope.load_todo_list(_callback);
-                    });
-                }
-            }
-        });
+        return factory_book_cart.clear_todo_list($scope, _callback);
     };
     
     $scope.clear_completed_list = function (_callback) {
-        ons.notification.confirm({
-            message: "確定要清空歷史記錄嗎？",
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    DB.exec("DELETE FROM list WHERE checked = 1", function () {
-                        $scope.load_completed_list(_callback);
-                    });
-                }
-            }
-        });
+        return factory_book_cart.clear_completed_list($scope, _callback);
     };
 
     $scope.add = function (_isbn, _callback) {
-        if (typeof(_isbn) === "function") {
-            _callback = _isbn;
-            _isbn = null;
-        }
-        
-        if (typeof(_isbn) !== "string") {
-            _isbn = $.trim($('[name="isbn"]').val());
-        }
-        console.log(_isbn);
-        $scope.has_item(_isbn, function (_result, _item) {
-            //console.log("_.add" + _result);
-            if (_result === false) {
-                $scope.request_add(_isbn, function () {
-                    $scope.load_todo_list(function (_data) {
-                        //app.navi.pushPage('list.html');
-                        console.log(_data);
-                        $scope.isbn = "";
-                        $scope.$digest();
-                        _trigger_callback(_callback);
-                    });
-                });
-            }
-            else {
-                $scope.has_item_notify(_item, _callback);
-            }
-        });
-        return false;
+        return factory_book_cart.add($scope, _isbn, _callback);
     };
 
     $scope.has_item_notify = function (_item_list, _callback) {
-        //console.log("has_item_notify");
-        //console.log(_item_list);
-        if (typeof(_item_list.length) !== "number") {
-            _item_list = [_item_list];
-        }
-        var _title = "";
-        for (var _i = 0; _i < _item_list.length; _i++) {
-            if (_title !== "") {
-                _title = _title + "、";
-            }
-            _title = _title + _item_list[_i].title;
-        }
-        ons.notification.alert(_title + " 已經有資料了。");
-
-//        if (_item.checked === 1) {
-//            $scope.load_completed_list(function () {
-//                app.navi.replacePage("completed_list.html", {animation: 'none'});
-//            });
-//        }
-
-        _trigger_callback(_callback);
+        return factory_book_cart.has_item_notify($scope, _item_list, _callback);
     };
 
     $scope.request_add = function (_isbn, _callback) {
@@ -469,7 +273,37 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
         $("body").addClass("web-view");
     }
     
+    // -----------------------------------
+    
+/**
+ * 警告功能的覆寫
+ * @author Pudding 20151123
+ */
+ons.notification._alert = ons.notification.alert;
+ons.notification.alert = function (_opt) {
+    if (typeof(_opt) === "string") {
+        _opt = {
+            message: _opt,
+            // or messageHTML: '<div>Message in HTML</div>',
+            title: $filter('translate')('TITLE'),
+            buttonLabel: 'OK'
+        };
+    }
+
+    ons.notification._alert(_opt);
+};
+
+/**
+ * 記錄功能的縮寫
+ * @author Pudding 20151123
+ */
+$.log = function (_msg) {
+    console.log(_msg);
+};
+    
+    
     ons.ready(function () {
+        ons.notification.alert("測試");
         //console.log("ready");
         $scope.load_todo_list(function () {
             //console.log("ready 2");
@@ -503,4 +337,3 @@ app.controller('book_list_controller', ['$scope', '$filter', function ($scope, $
     });
 
 }]);
-
