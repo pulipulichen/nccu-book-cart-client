@@ -1,3 +1,4 @@
+/*global cordova:false */
 var cordova_barcode_scan = function ($scope, $filter) {
 
     /**

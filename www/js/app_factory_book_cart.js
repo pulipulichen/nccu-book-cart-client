@@ -1,14 +1,7 @@
 /*global DB:false */
+/*global modal:false */
+/*global app:false */
 var _app_factory_book_cart = function ($scope, $filter) {
-
-    $scope.check_search_enable = function () {
-        if ($.trim($scope.isbn) !== "") {
-
-        }
-        else {
-
-        }
-    };
 
     $scope.load_lists = function (_callback) {
         $scope.load_todo_list(function () {
@@ -283,7 +276,14 @@ var _app_factory_book_cart = function ($scope, $filter) {
         }
     };  //$scope.open_map = function (_location) {
 
-    $scope.complete_item = function (_id, _callback) {
+    $scope.open_item_page = function (_isbn) {
+        var _url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" + _isbn  + "&searchscope=5&SORT=DZ&extended=0&availlim=1=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
+        window.open(_url, "_system");
+    };
+
+    $scope.complete_item = function (_id, $event, _callback) {
+        $event.preventDefault();
+        $event.stopPropagation()
         var _time = (new Date()).getTime();
         $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time 
                 + " WHERE id = " + _id, function () {
@@ -293,7 +293,10 @@ var _app_factory_book_cart = function ($scope, $filter) {
         });
     };  //$scope.complete_item = function (_id, _callback) {
 
-    $scope.undo_item = function (_id, _callback) {
+    $scope.undo_item = function (_id, $event, _callback) {
+        
+        $event.preventDefault();
+        $event.stopPropagation()
         var _time = (new Date()).getTime();
         $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time 
                 + " WHERE id = " + _id, function () {

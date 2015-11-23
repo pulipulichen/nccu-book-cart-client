@@ -1,3 +1,5 @@
+/*global cordova:false */
+/*global app:false */
 var _app_factory_ons_view = function ($scope) {
 //    $scope.presplit = function () {
 //        $("#split").addClass("split");

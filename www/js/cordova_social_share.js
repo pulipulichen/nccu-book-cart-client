@@ -1,3 +1,4 @@
+/*global cordova:false */
 var cordova_social_share = function ($scope, $filter) {
 
     /**

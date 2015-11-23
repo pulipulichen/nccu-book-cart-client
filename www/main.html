@@ -17,7 +17,7 @@
             </ons-toolbar-button>
         </div>
     </ons-toolbar>
-    
+
     <form id="scan_barcode" ng-submit="add();">
         <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
 
@@ -45,7 +45,7 @@
 
 
     <ons-list ng-repeat="location in todo_list">
-        <ons-list-item class="location" modifier="chevron" class="list-item-container"  
+        <ons-list-item class="location" modifier="tappable chevron" class="list-item-container"  
                        ng-click="open_map(location.location)" ng-show="location.location !== ''">
             <div class="list-item-left">
                 {{location.location}}
@@ -54,16 +54,17 @@
             </div>
         </ons-list-item>
 
-        <ons-list-item modifier="tappable" 
-                       ng-repeat="item in location.items" ng-click="complete_item(item.id)"
+        <ons-list-item modifier="tappable chevron" 
+                       ng-repeat="item in location.items"
+                       ng-click="open_item_page(item.isbn)"
                        class="list-item-container">
-            <ons-icon icon="ion-ios-circle-outline" size="20px"></ons-icon>
-                <span class="title">
-                    {{item.title}}
-                </span>
-                <span class="call_number">
-                    {{item.call_number}}
-                </span>
+            <ons-icon icon="ion-ios-circle-outline" size="20px" ng-click="complete_item(item.id, $event)"></ons-icon>
+            <span class="title">
+                {{item.title}}
+            </span>
+            <span class="call_number">
+                {{item.call_number}}
+            </span>
         </ons-list-item>
     </ons-list>
 

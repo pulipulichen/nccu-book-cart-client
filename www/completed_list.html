@@ -21,10 +21,12 @@
     <!-- --------------------------------------------------------- -->
 
     <ons-list>
-        <ons-list-item modifier="tappable" class="list-item-container"
-                       ng-repeat="item in completed_list" ng-click="undo_item(item.id)" ng-class="item_id_{{item.id}}">
-            
-            <ons-icon icon="ion-ios-checkmark-outline" size="20px"></ons-icon>
+        <ons-list-item modifier="tappable chevron" 
+                       class="list-item-container"
+                       ng-repeat="item in completed_list" 
+                       ng-class="item_id_{{item.id}}" 
+                       ng-click="open_item_page(item.isbn)">
+            <ons-icon icon="ion-ios-checkmark-outline" size="20px" ng-click="undo_item(item.id, $event)" ></ons-icon>
             <span class="title">
                 {{item.title}}
             </span>
@@ -33,5 +35,4 @@
             </span>
         </ons-list-item>
     </ons-list>
-    1111111111111111111
 </ons-page>
