@@ -9,6 +9,8 @@
     "SEARCH": "搜尋",
     "SEARCH_PLACEHOLDER": "輸入ISBN查詢...",
     "HAS_TIEM_ALERT": "已經有資料了。",
+    "NOT_FOUND": "找不到這本書",
+    "NOT_AVAILABLE": "沒有可流通的資料",
     
     "COMPLETED_LIST": "歷史清單",
     "CLEAR_COMPLETED_LIST": "確定要清空歷史記錄嗎？",

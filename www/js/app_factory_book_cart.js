@@ -176,7 +176,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             //alert("request_add 2");
             if (typeof (_data_list.error) === "string") {
                 modal.hide();
-                ons.notification.alert(_data_list.error);
+                ons.notification.alert($filter('translate')(_data_list.error));
                 $.trigger_callback(_callback);
                 return;
             }
