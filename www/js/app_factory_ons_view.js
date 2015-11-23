@@ -53,6 +53,17 @@ var _app_factory_ons_view = function ($scope) {
         app.menu.close();
     };
     
+    
+    // -------------------
+    $scope.menu_click = function ($event) {
+        if ($(window).width() < 400) {
+            app.menu.close();
+        }
+        
+        $("#menu_html .menu-active").removeClass("menu-active");
+        $($event.target).addClass("menu-active");
+    };
+    
 
     // -------------------
 
