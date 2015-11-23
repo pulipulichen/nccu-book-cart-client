@@ -2,8 +2,15 @@ var _app_factory_config = function ($scope) {
     $scope.config_init = function () {
 
         $scope.CONFIG = {
-            "proxy_url": "http://www.pulipuli.tk/book-list/server/",
-            "test_mode": false
+            "proxy_url": "http://www.pulipuli.tk/nccu-book-cart-server/",
+            "test_mode": false,
+            "paypal": {
+                "amount": "30",
+                "money": "TWD",
+                "product": "資助布丁畢業",
+                "client_id": "AVQkoWAg7H5IVWVC2_Mv3-6bZMzwhhDPxJ5VtZ5sAqz5CO1G-DlnKZyuh_OTamv5G1KtH4bv1qGOF6LI",
+                "email_address": "pulipuli.chen@gmail.com"
+            }
         };
 
         // ------------------------------------

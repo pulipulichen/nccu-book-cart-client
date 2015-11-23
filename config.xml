@@ -27,6 +27,7 @@
     <plugin name="org.tt.plugin.tts" spec="1" source="pgb" />
     <plugin name="org.apache.cordova.inappbrowser" spec="0.3.3" source="pgb" />
     <plugin name="nl.x-services.plugins.socialsharing" spec="4.3.8" source="pgb" />
+    <plugin name="com.paypal.cordova.mobilesdk" spec="3.1.2" source="pgb" />
     
     <!--
       <gap:plugin name="de.appplant.cordova.plugin.local-notification"/>

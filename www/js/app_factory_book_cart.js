@@ -283,7 +283,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.complete_item = function (_id, $event, _callback) {
         $event.preventDefault();
-        $event.stopPropagation()
+        $event.stopPropagation();
         var _time = (new Date()).getTime();
         $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time 
                 + " WHERE id = " + _id, function () {
@@ -296,7 +296,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
     $scope.undo_item = function (_id, $event, _callback) {
         
         $event.preventDefault();
-        $event.stopPropagation()
+        $event.stopPropagation();
         var _time = (new Date()).getTime();
         $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time 
                 + " WHERE id = " + _id, function () {

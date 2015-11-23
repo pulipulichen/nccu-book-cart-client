@@ -14,3 +14,6 @@ http://localhost/book-list/www/
 
 # ionicons
 http://ionicons.com/
+
+# Server的部分請看
+https://github.com/pulipulichen/nccu-book-cart-server

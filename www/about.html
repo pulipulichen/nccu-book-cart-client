@@ -39,8 +39,8 @@
             {{ 'VISIT_BLOG' | translate}}
         </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="$(this).find('form').submit();">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="get" target="_system">
+        <ons-list-item modifier="chevron" ng-click="cordova_inappbrowser_submit('.paypal_form');">
+            <form action="https://www.paypal.com/cgi-bin/webscr" class="paypal_form" method="form" target="_system">
 
                 <ons-icon icon="ion-card" size="20px"></ons-icon>
                 {{ 'DONATE' | translate}}

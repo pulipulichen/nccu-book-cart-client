@@ -79,6 +79,7 @@
     <script src="js/app_ready.js"></script>
     <script src="js/cordova_barcode_scan.js"></script>
     <script src="js/cordova_social_share.js"></script>
+    <script src="js/cordova_inappbrowser_submit.js"></script>
     
     <script type="text/javascript">
         var app = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
@@ -115,13 +116,15 @@
 
             cordova_barcode_scan($scope, $filter);
             cordova_social_share($scope, $filter);
+            cordova_inappbrowser_submit($scope);
             // -----------------------------------
 
             _app_ready($scope);
         }]);
     </script>
 
+    <!-- cordova -->
     <script src="cordova.js"></script>
-
+    <script type="text/javascript" src="js/paypal-mobile-js-helper.js"></script>
 </body>
 </html>
