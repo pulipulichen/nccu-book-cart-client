@@ -83,7 +83,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.load_completed_list = function (_callback) {
 
     $scope.clear_list = function (_callback) {
-        ons.notification.confirm("確定要清空所有清單嗎？", function (_answer) {
+        ons.notification.confirm($filter('translate')('CLEAR_ALL_LIST'), function (_answer) {
             if (_answer === 1) {
                 $scope.DB.empty_table("list");
                 $scope.load_lists(_callback);
@@ -93,8 +93,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.clear_todo_list = function (_callback) {
         ons.notification.confirm({
-            //message: $translate("TODO_LIST_EMPTY_CONFIRM"),
-            message: $filter('translate')('TODO_LIST_EMPTY_CONFIRM'),
+            message: $filter('translate')('CLEAR_TODO_LIST'),
             callback: function (_answer) {
                 //console.log(_answer);
                 if (_answer === 1) {
@@ -108,7 +107,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.clear_completed_list = function (_callback) {
         ons.notification.confirm({
-            message: "確定要清空歷史記錄嗎？",
+            message: $filter('translate')('CLEAR_COMPLETED_LIST'),
             callback: function (_answer) {
                 //console.log(_answer);
                 if (_answer === 1) {
@@ -163,7 +162,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             }
             _title = _title + _item_list[_i].title;
         }
-        ons.notification.alert(_title + " 已經有資料了。");
+        ons.notification.alert(_title + " " + $filter('translate')('HAS_TIEM_ALERT'));
 
 //        if (_item.checked === 1) {
 //            $scope.load_completed_list(function () {
@@ -286,7 +285,8 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.complete_item = function (_id, _callback) {
         var _time = (new Date()).getTime();
-        $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time + " WHERE id = " + _id, function () {
+        $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time 
+                + " WHERE id = " + _id, function () {
             $scope.load_todo_list(function () {
                 //$scope.$digest();
             });
@@ -295,7 +295,8 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.undo_item = function (_id, _callback) {
         var _time = (new Date()).getTime();
-        $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time + " WHERE id = " + _id, function () {
+        $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time 
+                + " WHERE id = " + _id, function () {
             $scope.load_completed_list(function () {
                 $scope.$digest();
             });
@@ -313,38 +314,13 @@ var _app_factory_book_cart = function ($scope, $filter) {
     $scope.scan_barcode = function () {
         var _search = function (_isbn) {
             $scope.isbn = _isbn;
-            //$scope.$digest();
             $scope.add(_isbn);
         };
-
-        if (typeof (cordova) !== "undefined") {
-            cordova.plugins.barcodeScanner.scan(
-                    function (_result) {
-                        _search(_result.text);
-                    },
-                    function (error) {
-                        ons.notification.alert({
-                            message: "Scanning failed: " + error,
-                            // or messageHTML: '<div>Message in HTML</div>',
-                            title: '錯誤',
-                            buttonLabel: 'OK'
-                        });
-                    }
-            );
-        }
-        else {
-            _search($scope.mock_isbn);
-//        ons.notification.alert({
-//            message: '只有手機才能使用掃描條碼功能',
-//            // or messageHTML: '<div>Message in HTML</div>',
-//            title: '錯誤',
-//            buttonLabel: 'OK'
-//        });
-
-        }
+        
+        $scope.cordova_barcode_scan(_search, $scope.mock_isbn);
     };  //$scope.scan_barcode = function () {
 
     $scope.share_app = function () {
-        $scope.cordova_social_share("我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/");
+        $scope.cordova_social_share($filter('translate')('SHARE_APP'));
     };
 };

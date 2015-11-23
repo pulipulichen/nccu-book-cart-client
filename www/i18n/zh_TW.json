@@ -4,15 +4,19 @@
     "BOOK_LIST": "借書清單",
 
     "TODO_LIST": "借書清單",
-    "TODO_LIST_EMPTY_CONFIRM": "您確定要清空借書清單嗎？",
+    "CLEAR_TODO_LIST": "您確定要清空借書清單嗎？",
     "SCAN_BARCODE": "掃描條碼",
     "SEARCH": "搜尋",
     "SEARCH_PLACEHOLDER": "輸入ISBN查詢...",
+    "HAS_TIEM_ALERT": "已經有資料了。",
     
     "COMPLETED_LIST": "歷史清單",
+    "CLEAR_COMPLETED_LIST": "確定要清空歷史記錄嗎？",
     
     "SETTING": "設定",
+    "CLEAR_ALL_LIST": "確定要清空所有清單嗎？",
     "SUGGESTION": "提出建議",
+    "SHARE_APP": "我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/",
     
     "ABOUT": "關於作者",
     "AUTHOR_NAME": "布丁布丁吃布丁",
