@@ -2,42 +2,7 @@
 
 var _ons_init = function () {
 
-    var app = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
-
-    /**
-     * 翻譯
-     * @param {type} param
-     */
-    app.config(function ($translateProvider) {
-        $translateProvider.preferredLanguage('zh_TW');
-        $translateProvider.useStaticFilesLoader({
-            prefix: 'i18n/',
-            suffix: '.json'
-        });
-    });
-
-// --------------------------
-
-    var _app_controller = function ($scope, $filter) {
-        _app_factory_db($scope);
-
-        _app_factory_config($scope);
-
-        _app_factory_book_cart($scope, $filter);
-
-        _app_factory_ons_view($scope);
-
-        _app_factory_ons_utils($scope, $filter);
-        _app_factory_jquery_utils($scope);
-        // -----------------------------------
-
-        _app_ready($scope);
-    };
-
-    app.controller('app_controller'
-            , ['$scope',
-                '$filter',
-                _app_controller]);
+    
 };
 
 var _load_script_list = function (_script_list, _callback) {

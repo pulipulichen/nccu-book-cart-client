@@ -23,12 +23,10 @@
 
         <!-- --------------- App init --------------- -->
         <link rel="stylesheet" href="css/onsen-css-components.min.css" />
-        
+
         <link rel="stylesheet" href="css/onsenui.css" />
         <link rel="stylesheet" href="css/onsen-css-components.css" />
         <link rel="stylesheet" href="css/myapp.css" />
-        <!-- Cordova reference -->
-        <script src="js/onsen_init.js"></script>
 
         <script src="js/database_utils.js"></script>
         <script src="js/ons_utils.js"></script>
@@ -39,45 +37,89 @@
 
     <body ng-controller="app_controller">
 
-    <div ons-loading-placeholder="menu" style="text-align:center;">
-        <img src="img/loading.svg" style="position:fixed;top: calc(50% - 60px);left: calc(50% - 60px)" /> 
-    </div>
+        <div ons-loading-placeholder="menu" style="text-align:center;">
+            <img src="img/loading.svg" style="position:fixed;top: calc(50% - 60px);left: calc(50% - 60px)" /> 
+        </div>
 
 
     <ons-modal var="modal" class="now-loading-modal">
         <ons-icon icon="ion-load-c" spin="true"></ons-icon>
     </ons-modal>
 
-<!--
-<ons-split-view
-    var="app" 
-  secondary-page="menu.html"
-  main-page="main.html"
-  main-page-width="70%"
-  collapse="portrait"
-  id="split">
-</ons-split-view>
-</div>
-
-<div ons-if-orientation="portrait">
--->
-  <ons-sliding-menu id="menu" var="app.menu" 
-  main-page="main" menu-page="menu.html" max-slide-distance="200px" 
-  type="reveal" side="left" ons-preopen="menu_open()" ons-preclose="menu_close()" ></ons-sliding-menu>
+    <!--
+    <ons-split-view
+        var="app" 
+      secondary-page="menu.html"
+      main-page="main.html"
+      main-page-width="70%"
+      collapse="portrait"
+      id="split">
+    </ons-split-view>
+    </div>
+    
+    <div ons-if-orientation="portrait">
+    -->
+    <ons-sliding-menu id="menu" var="app.menu" 
+                      main-page="main" menu-page="menu.html" max-slide-distance="200px" 
+                      type="reveal" side="left" ons-preopen="menu_open()" ons-preclose="menu_close()" ></ons-sliding-menu>
 
 
     <ons-template id="main">
         <ons-navigator var="app.navi" page="main.html"></ons-navigator> 
     </ons-template>
-<!--
-</div>
--->
+    <!--
+    </div>
+    -->
 
-    
+
     <!-- ---------------------------------------- -->
-    <script src="js/app_controller.js"></script>
+    <script src="js/app_factory_config.js"></script>
+    <script src="js/app_factory_db.js"></script>
+    <script src="js/app_factory_book_cart.js"></script>
+    <script src="js/app_factory_ons_view.js"></script>
+    <script src="js/app_factory_ons_utils.js"></script>
+    <script src="js/app_factory_jquery.js"></script>
+    <script src="js/app_ready.js"></script>
+    <script type="text/javascript">
+                var app = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
+
+                /**
+                 * 翻譯
+                 * @param {type} param
+                 */
+                app.config(function ($translateProvider) {
+                    $translateProvider.preferredLanguage('zh_TW');
+                    $translateProvider.useStaticFilesLoader({
+                        prefix: 'i18n/',
+                        suffix: '.json'
+                    });
+                });
+
+// --------------------------
+
+                var _app_controller = function ($scope, $filter) {
+                    _app_factory_db($scope);
+
+                    _app_factory_config($scope);
+
+                    _app_factory_book_cart($scope, $filter);
+
+                    _app_factory_ons_view($scope);
+
+                    _app_factory_ons_utils($scope, $filter);
+                    _app_factory_jquery_utils($scope);
+                    // -----------------------------------
+
+                    _app_ready($scope);
+                };
+
+                app.controller('app_controller'
+                        , ['$scope',
+                            '$filter',
+                            _app_controller]);
+    </script>
 
     <script src="cordova.js"></script>
-    
+
 </body>
 </html>
