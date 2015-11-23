@@ -307,7 +307,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.undo_item = function (_id, _callback) {
 
     $scope.search = function () {
-        if ($.trim($scope.isbn) === "") {
+        if ($.trim($(".search-input").val()) === "") {
             $(".search-input").focus();
             return this;
         }
