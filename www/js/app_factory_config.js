@@ -2,7 +2,7 @@ var _app_factory_config = function ($scope) {
     $scope.config_init = function () {
 
         $scope.CONFIG = {
-            "proxy_url": "http://www.pulipuli.tk/nccu-book-cart-server/",
+            "proxy_url": "http://public-nccu-book-cart-2015.dlll.nccu.edu.tw/nccu-book-cart-server/",
             "test_mode": false
         };
 

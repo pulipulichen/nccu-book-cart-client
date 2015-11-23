@@ -125,7 +125,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
         $scope.request_add(_isbn, function () {
             $scope.load_todo_list(function (_data) {
                 //app.navi.pushPage('list.html');
-                console.log(_data);
+                //console.log(_data);
                 $scope.isbn = "";
                 $scope.$digest();
                 $.trigger_callback(_callback);

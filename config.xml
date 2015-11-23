@@ -3,7 +3,7 @@
     <name>NCCU Book Cart</name>
     <description>
         還在用筆抄要借的書嗎？政大借書籃讓您記錄在APP上，方便查詢。還可以直接掃描條碼來記錄喔！
-        本APP的原始碼開源於 https://github.com/pulipulichen/book-list
+        本APP的原始碼開源於 https://github.com/pulipulichen/nccu-book-cart-client
     </description>
     <author href="http://pulipuli.blogspot.tw" email="pulipuli.chen@gmail.com">布丁布丁吃布丁</author>
   
@@ -24,12 +24,12 @@
     
     <!-- 外掛 -->
     <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
-    <plugin name="org.tt.plugin.tts" spec="1" source="pgb" />
     <plugin name="org.apache.cordova.inappbrowser" spec="0.3.3" source="pgb" />
     <plugin name="nl.x-services.plugins.socialsharing" spec="4.3.8" source="pgb" />
-    <plugin name="com.paypal.cordova.mobilesdk" spec="3.1.2" source="pgb" />
     
     <!--
-      <gap:plugin name="de.appplant.cordova.plugin.local-notification"/>
+    <plugin name="org.tt.plugin.tts" spec="1" source="pgb" />
+    <plugin name="com.paypal.cordova.mobilesdk" spec="3.1.2" source="pgb" />
+    <gap:plugin name="de.appplant.cordova.plugin.local-notification"/>
     -->
 </widget>
