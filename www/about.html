@@ -40,7 +40,7 @@
         </ons-list-item>
 
         <ons-list-item modifier="chevron" ng-click="cordova_inappbrowser_submit('.paypal_form');">
-            <form action="https://www.paypal.com/cgi-bin/webscr" class="paypal_form" method="post" target="paypal_iframe">
+            <form action="https://www.paypal.com/cgi-bin/webscr" class="paypal_form" method="get" target="_system">
 
                 <ons-icon icon="ion-card" size="20px"></ons-icon>
                 {{ 'DONATE' | translate}}
