@@ -1,6 +1,15 @@
 /*global DB:false */
 var _app_factory_book_cart = function ($scope, $filter) {
 
+    $scope.check_search_enable = function () {
+        if ($.trim($scope.isbn) !== "") {
+            
+        }
+        else {
+            
+        }
+    };
+
     $scope.load_lists = function (_callback) {
         $scope.load_todo_list(function () {
             $scope.load_completed_list(function () {
@@ -297,6 +306,10 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.undo_item = function (_id, _callback) {
 
     $scope.search = function () {
+        if ($.trim($scope.isbn) === "") {
+            $(".search-input").focus();
+            return this;
+        }
         $scope.add();
     };  //$scope.search = function () {
 
