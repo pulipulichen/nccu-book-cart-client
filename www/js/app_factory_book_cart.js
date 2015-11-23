@@ -46,7 +46,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             }
         };
 
-        DB.exec("SELECT * "
+        $scope.DB.exec("SELECT * "
                 + "FROM list WHERE checked = 0 ORDER BY update_timestamp DESC"
                 , _db_callback);
     };  //$scope.load_todo_list = function (_callback) {
@@ -68,7 +68,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
                 _callback(_data);
             }
         };
-        DB.exec("SELECT * "
+        $scope.DB.exec("SELECT * "
                 + "FROM list WHERE checked = 1 ORDER BY update_timestamp DESC"
                 , _db_callback);
     };  //$scope.load_completed_list = function (_callback) {
@@ -78,7 +78,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             callback: function (_answer) {
                 //console.log(_answer);
                 if (_answer === 1) {
-                    DB.empty_table("list");
+                    $scope.DB.empty_table("list");
                     $scope.load_lists(_callback);
                 }
             }
@@ -92,7 +92,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             callback: function (_answer) {
                 //console.log(_answer);
                 if (_answer === 1) {
-                    DB.exec("DELETE FROM list WHERE checked = 0", function () {
+                    $scope.DB.exec("DELETE FROM list WHERE checked = 0", function () {
                         $scope.load_todo_list(_callback);
                     });
                 }
@@ -106,7 +106,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             callback: function (_answer) {
                 //console.log(_answer);
                 if (_answer === 1) {
-                    DB.exec("DELETE FROM list WHERE checked = 1", function () {
+                    $scope.DB.exec("DELETE FROM list WHERE checked = 1", function () {
                         $scope.load_completed_list(_callback);
                     });
                 }
@@ -212,7 +212,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
                                 _i++;
                                 _loop(_i);
                             };
-                            DB.exec('INSERT INTO list '
+                            $scope.DB.exec('INSERT INTO list '
                                     + '(author, title, call_number, isbn, location, checked'
                                     + ', create_timestamp, update_timestamp) '
                                     + 'VALUES ("' + _author + '", "' + _title + '", "' + _call_number + '", "' + _isbn
@@ -252,7 +252,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             return;
         }
         var _i = _isbn;
-        DB.exec('SELECT title, id, checked FROM list WHERE isbn = "' + _i + '"'
+        $scope.DB.exec('SELECT title, id, checked FROM list WHERE isbn = "' + _i + '"'
                 , function (_results) {
                     //console.log("has_item result: " + _results.rows.length);
                     if (_results.rows.length > 0) {
@@ -274,7 +274,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.complete_item = function (_id, _callback) {
         var _time = (new Date()).getTime();
-        DB.exec("update list SET checked = 1, update_timestamp = " + _time + " WHERE id = " + _id, function () {
+        $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time + " WHERE id = " + _id, function () {
             $scope.load_todo_list(function () {
                 //$scope.$digest();
             });
@@ -283,7 +283,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.undo_item = function (_id, _callback) {
         var _time = (new Date()).getTime();
-        DB.exec("update list SET checked = 0, update_timestamp = " + _time + " WHERE id = " + _id, function () {
+        $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time + " WHERE id = " + _id, function () {
             $scope.load_completed_list(function () {
                 $scope.$digest();
             });

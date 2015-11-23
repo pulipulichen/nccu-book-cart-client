@@ -6,6 +6,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
 
+    <!-- ---------------------------------------- 
+      -- Library
+      -- ---------------------------------------- -->
         <!-- JS dependencies (order matters!) -->
         <script src="scripts/platformOverrides.js"></script>
         <script src="lib/angular/angular.min.js"></script>
@@ -14,27 +17,29 @@
 
         <script src="lib/onsen/js/onsenui.min.js"></script>
         <script src="lib/zepto/zepto.min.js"></script>
-
+        
         <!-- CSS dependencies -->
         <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
 
         <!-- CSP support mode (required for Windows Universal apps) -->
         <link rel="stylesheet" href="lib/angular/angular-csp.css" />
 
-        <!-- --------------- App init --------------- -->
-        <link rel="stylesheet" href="css/onsen-css-components.min.css" />
-
-        <link rel="stylesheet" href="css/onsenui.css" />
         <link rel="stylesheet" href="css/onsen-css-components.css" />
-        <link rel="stylesheet" href="css/myapp.css" />
+    <!-- ---------------------------------------- 
+      -- Style
+      -- ---------------------------------------- -->
+        <link rel="stylesheet" href="css/app.css" />
 
         <script src="js/database_utils.js"></script>
-        <script src="js/ons_utils.js"></script>
+        
+        
         <title>{{ 'TITLE' | translate }}</title>
-
 
     </head>
 
+    <!-- ---------------------------------------- 
+      -- View
+      -- ---------------------------------------- -->
     <body ng-controller="app_controller">
 
         <div ons-loading-placeholder="menu" style="text-align:center;">
@@ -46,19 +51,6 @@
         <ons-icon icon="ion-load-c" spin="true"></ons-icon>
     </ons-modal>
 
-    <!--
-    <ons-split-view
-        var="app" 
-      secondary-page="menu.html"
-      main-page="main.html"
-      main-page-width="70%"
-      collapse="portrait"
-      id="split">
-    </ons-split-view>
-    </div>
-    
-    <div ons-if-orientation="portrait">
-    -->
     <ons-sliding-menu id="menu" var="app.menu" 
                       main-page="main" menu-page="menu.html" max-slide-distance="200px" 
                       type="reveal" side="left" ons-preopen="menu_open()" ons-preclose="menu_close()" ></ons-sliding-menu>
@@ -67,13 +59,14 @@
     <ons-template id="main">
         <ons-navigator var="app.navi" page="main.html"></ons-navigator> 
     </ons-template>
-    <!--
-    </div>
-    -->
 
 
-    <!-- ---------------------------------------- -->
+    
+    <!-- ---------------------------------------- 
+      -- Controller
+      -- ---------------------------------------- -->
     <script src="js/app_factory_config.js"></script>
+    <script src="js/app_factory_db_utils.js"></script>
     <script src="js/app_factory_db.js"></script>
     <script src="js/app_factory_book_cart.js"></script>
     <script src="js/app_factory_ons_view.js"></script>
@@ -98,9 +91,12 @@
 // --------------------------
 
                 var _app_controller = function ($scope, $filter) {
-                    _app_factory_db($scope);
+                    
 
                     _app_factory_config($scope);
+                    
+                    _app_factory_db_utils($scope);
+                    _app_factory_db($scope);
 
                     _app_factory_book_cart($scope, $filter);
 
