@@ -57,17 +57,13 @@
         <ons-list-item modifier="tappable" 
                        ng-repeat="item in location.items" ng-click="complete_item(item.id)"
                        class="list-item-container">
-
-            <label class="checkbox checkbox--list-item">
-                <input type="checkbox" />
-                <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+            <ons-icon icon="ion-ios-circle-outline" size="20px"></ons-icon>
                 <span class="title">
                     {{item.title}}
                 </span>
                 <span class="call_number">
                     {{item.call_number}}
                 </span>
-            </label>
         </ons-list-item>
     </ons-list>
 

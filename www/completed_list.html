@@ -23,18 +23,15 @@
     <ons-list>
         <ons-list-item modifier="tappable" class="list-item-container"
                        ng-repeat="item in completed_list" ng-click="undo_item(item.id)" ng-class="item_id_{{item.id}}">
-            <label class="checkbox checkbox--list-item">
-                <input type="checkbox" checked="checked" />
-                <div class="checkbox__checkmark checkbox--list-item__checkmark">
-                </div>
-                <span class="title">
-                    {{item.title}}
-                </span>
-                <span class="call_number">
-                    {{item.call_number}}
-                </span>
-            </label>
+            
+            <ons-icon icon="ion-ios-checkmark-outline" size="20px"></ons-icon>
+            <span class="title">
+                {{item.title}}
+            </span>
+            <span class="call_number">
+                {{item.call_number}}
+            </span>
         </ons-list-item>
     </ons-list>
-    
+    1111111111111111111
 </ons-page>
