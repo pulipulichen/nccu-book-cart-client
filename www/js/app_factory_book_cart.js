@@ -35,7 +35,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             }
 
             //console.log(_data.length);
-            console.log(_data);
+            //console.log(_data);
             if (_data.length === 0) {
                 _data = $scope.empty_todo_list;
             }
