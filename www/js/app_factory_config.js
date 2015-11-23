@@ -45,7 +45,7 @@ var _app_factory_config = function ($scope) {
         };
         $scope.map_title = "";
         $scope.map_src = "";
-
+        
     };  //$scope.config_init = function () {
 
 

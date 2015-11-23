@@ -47,28 +47,31 @@ var cordova_inappbrowser_submit = function ($scope) {
 //        //$event.preventDefault();
 //        //$event.stopPropagation();
 //        
-        var _form = $(_selector);
-        
-        var _get_parameters = "";
-        
-        var _collect_input = function (_selector) {
-            var _inputs = _form.find(_selector);
-            for (var _i = 0; _i < _inputs.length; _i++) {
-                if (_get_parameters !== "") {
-                    _get_parameters = _get_parameters + "&";
-                }
-                var _val = _inputs.eq(_i).val();
-                _val = encodeURI(_val);
-                _get_parameters = _get_parameters + _inputs.eq(_i).attr("name") + "=" + _val;
-            }
-        };
-        
-        _collect_input("input");
-        _collect_input("select");
-            
-        var _url = _form.attr("action") + "?" + _get_parameters;
-        //alert(_url);
-        window.open(_url, "_system");
-        //console.log(_url);
+//        var _form = $(_selector);
+//        
+//        var _get_parameters = "";
+//        
+//        var _collect_input = function (_selector) {
+//            var _inputs = _form.find(_selector);
+//            for (var _i = 0; _i < _inputs.length; _i++) {
+//                if (_get_parameters !== "") {
+//                    _get_parameters = _get_parameters + "&";
+//                }
+//                var _val = _inputs.eq(_i).val();
+//                _val = encodeURI(_val);
+//                _get_parameters = _get_parameters + _inputs.eq(_i).attr("name") + "=" + _val;
+//            }
+//        };
+//        
+//        _collect_input("input");
+//        _collect_input("select");
+//            
+//        var _url = _form.attr("action") + "?" + _get_parameters;
+//        //alert(_url);
+//        window.open(_url, "_system");
+//        //console.log(_url);
+        app.navi.pushPage("paypal.html", {onTransitionEnd: function () {
+            var _form  = $(_selector).submit();
+        }});
     };
 };
