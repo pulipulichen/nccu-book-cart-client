@@ -85,31 +85,28 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.clear_list = function (_callback) {
 
     $scope.clear_todo_list = function (_callback) {
-        ons.notification.confirm({
-            message: $filter('translate')('CLEAR_TODO_LIST'),
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    $scope.DB.exec("DELETE FROM list WHERE checked = 0", function () {
-                        $scope.load_todo_list(_callback);
-                    });
+        ons.notification.confirm($filter('translate')('CLEAR_TODO_LIST'),
+                function (_answer) {
+                    //console.log(_answer);
+                    if (_answer === 1) {
+                        $scope.DB.exec("DELETE FROM list WHERE checked = 0", function () {
+                            $scope.load_todo_list(_callback);
+                        });
+                    }
                 }
-            }
-        });
+        );
     };  //$scope.clear_todo_list = function (_callback) {
 
     $scope.clear_completed_list = function (_callback) {
-        ons.notification.confirm({
-            message: $filter('translate')('CLEAR_COMPLETED_LIST'),
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    $scope.DB.exec("DELETE FROM list WHERE checked = 1", function () {
-                        $scope.load_completed_list(_callback);
-                    });
-                }
-            }
-        });
+        ons.notification.confirm($filter('translate')('CLEAR_COMPLETED_LIST'),
+                function (_answer) {
+                    //console.log(_answer);
+                    if (_answer === 1) {
+                        $scope.DB.exec("DELETE FROM list WHERE checked = 1", function () {
+                            $scope.load_completed_list(_callback);
+                        });
+                    }
+                });
     };  //$scope.clear_completed_list = function (_callback) {
 
     $scope.add = function (_isbn, _callback) {
@@ -277,7 +274,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.open_map = function (_location) {
 
     $scope.open_item_page = function (_isbn) {
-        var _url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" + _isbn  + "&searchscope=5&SORT=DZ&extended=0&availlim=1=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
+        var _url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" + _isbn + "&searchscope=5&SORT=DZ&extended=0&availlim=1=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
         window.open(_url, "_system");
     };
 
@@ -285,25 +282,25 @@ var _app_factory_book_cart = function ($scope, $filter) {
         $event.preventDefault();
         $event.stopPropagation();
         var _time = (new Date()).getTime();
-        $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time 
+        $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time
                 + " WHERE id = " + _id, function () {
-            $scope.load_todo_list(function () {
-                //$scope.$digest();
-            });
-        });
+                    $scope.load_todo_list(function () {
+                        //$scope.$digest();
+                    });
+                });
     };  //$scope.complete_item = function (_id, _callback) {
 
     $scope.undo_item = function (_id, $event, _callback) {
-        
+
         $event.preventDefault();
         $event.stopPropagation();
         var _time = (new Date()).getTime();
-        $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time 
+        $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time
                 + " WHERE id = " + _id, function () {
-            $scope.load_completed_list(function () {
-                $scope.$digest();
-            });
-        });
+                    $scope.load_completed_list(function () {
+                        $scope.$digest();
+                    });
+                });
     };  //$scope.undo_item = function (_id, _callback) {
 
     $scope.search = function () {
@@ -319,7 +316,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             $scope.isbn = _isbn;
             $scope.add(_isbn);
         };
-        
+
         $scope.cordova_barcode_scan(_search, $scope.mock_isbn);
     };  //$scope.scan_barcode = function () {
 
