@@ -1,0 +1,10 @@
+
+body.web-view .fab .ons-icon {
+    vertical-align: 0%;
+}
+
+@media screen and (max-height: 200px) {
+    .fab {
+        display: none;
+    }
+}
