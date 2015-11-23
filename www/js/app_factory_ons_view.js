@@ -1,11 +1,11 @@
 var _app_factory_ons_view = function ($scope) {
-    $scope.presplit = function () {
-        $("#split").addClass("split");
-    };
-
-    $scope.precollapse = function () {
-        $("#split").removeClass("split");
-    };
+//    $scope.presplit = function () {
+//        $("#split").addClass("split");
+//    };
+//
+//    $scope.precollapse = function () {
+//        $("#split").removeClass("split");
+//    };
 
     $scope.menu_open = function () {
         //$(".onsen-split-view__secondary").css({
@@ -37,6 +37,22 @@ var _app_factory_ons_view = function ($scope) {
             window.close();
         }
     };
+    
+    // -------------------------
+    
+    $scope.main_back = function () {
+        if ($("#menu_html:visible").length === 0) {
+            $scope.exit_app();
+        }
+        else {
+            app.menu.open();
+        }
+    };
+    
+    $scope.menu_back = function () {
+        app.menu.close();
+    };
+    
 
     // -------------------
 
@@ -45,8 +61,10 @@ var _app_factory_ons_view = function ($scope) {
         $("body").addClass("web-view");
     }
 
+    $scope.swipeable_width = 400;
+
     $scope.setup_menu_swipeable = function () {
-        var _swipeable_width = 400;
+        var _swipeable_width = $scope.swipeable_width;
         var _menu_swipeable = true;
         var _set_menu_swipeable = function () {
             // This will execute whenever the window is resized
