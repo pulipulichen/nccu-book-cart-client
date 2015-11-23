@@ -10,8 +10,8 @@ var _app_factory_ons_utils = function ($scope, $filter) {
             _opt = {
                 message: _opt,
                 // or messageHTML: '<div>Message in HTML</div>',
-                title: $filter('translate')('TITLE'),
-                buttonLabel: $filter('translate')('ONS.OK')
+                title: $filter('translate')('ONS_TITLE'),
+                buttonLabel: $filter('translate')('ONS_OK')
             };
         }
 
@@ -27,8 +27,8 @@ var _app_factory_ons_utils = function ($scope, $filter) {
         if (typeof (_opt) === "string" 
                 && typeof(_callback) === "function") {
             _opt = {
-                title: $filter('translate')('TITLE'),
-                buttonLabels: [$filter('translate')('ONS.NO'), $filter('translate')('ONS.YES')],
+                title: $filter('translate')('ONS_TITLE'),
+                buttonLabels: [$filter('translate')('ONS_NO'), $filter('translate')('ONS_YES')],
                 message: _opt,
                 callback: _callback
             };

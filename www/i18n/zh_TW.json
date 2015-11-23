@@ -16,10 +16,11 @@
     "CLEAR_COMPLETED_LIST": "確定要清空歷史記錄嗎？",
     
     "SETTING": "設定",
+    "CLEAR_ALL_LIST": "清空所有列表",
     "CLEAR_ALL_LIST_CONFIRM": "確定要清空所有清單嗎？",
     "SUGGESTION": "提出建議",
     "SHARE_APP": "分享這個APP",
-    "SHARE_APP_TEXT": "我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/",
+    "SHARE_APP_TEXT": "我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/apps/details?id=pulipuli.blogspot.tw.nccu_book_cart",
     
     "ABOUT": "關於作者",
     "AUTHOR_PHONE": "布丁的照片",
@@ -31,10 +32,10 @@
     
     "EXIT_APP": "離開程式",
     
-    "ONS.TITLE": "政大借書籃",
-    "ONS.OK": "確定",
-    "ONS.YES": "確定",
-    "ONS.NO": "取消",
+    "ONS_TITLE": "政大借書籃",
+    "ONS_OK": "確定",
+    "ONS_YES": "確定",
+    "ONS_NO": "取消",
     
     "ONLY_PHONE_AVAILABLE": "只有手機上才能執行此功能"
 }
