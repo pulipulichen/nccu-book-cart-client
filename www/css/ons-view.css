@@ -3,6 +3,25 @@
     display: none;
 }
 
+
+/**
+ * 選單背景反白
+ */
+.page--menu-page__background {
+    background-color: #333;
+}
+#menu_html ons-list.ons-list-inner {
+    background-color: transparent;
+}
+
+#menu_html ons-list-item,
+#menu_html ons-toolbar-button .toolbar-button {
+    color: white;
+}
+
+/**
+ * RWD
+ */
 @media screen and (min-width: 550px) {
     .onsen-sliding-menu__menu {
         display: block !important;
@@ -26,6 +45,19 @@
         left: 0;
     }
 
+    /**
+     * 選單背景反白
+     */
+    .page--menu-page__background {
+        background-color: #FFF;
+    }
+    #menu_html ons-list-item {
+        color: black;
+    }
+
+/*    #menu_html ons-toolbar-button .toolbar-button {
+        color: white;
+    }*/
 }   /* @media screen and (min-width: 700px) { */
 
 @media screen and (min-width: 400px) and (max-width: 550px) {
