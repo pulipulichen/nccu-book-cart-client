@@ -1,0 +1,23 @@
+.search-input {
+    margin: 10px 0;
+    width: calc(100% - 29px);
+    height: 34px;
+    border-radius: 4px 0 0 4px;
+    box-sizing: content-box;
+}
+
+body.web-view .search-input {
+    height: 38px;
+}
+
+#scan_barcode {
+    width: 100%;
+}
+
+#main_html ons-button {
+    margin-top: 10px;
+}
+
+ons-list-item.location {
+    background-color: #CCC;
+}

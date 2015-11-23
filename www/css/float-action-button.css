@@ -3,6 +3,13 @@ body.web-view .fab .ons-icon {
     vertical-align: 0%;
 }
 
+.fab {
+    transform: scale(1);
+    position:absolute;
+    bottom: 25px;
+    right:25px;
+}
+
 @media screen and (max-height: 200px) {
     .fab {
         display: none;
