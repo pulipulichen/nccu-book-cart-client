@@ -1,6 +1,4 @@
-
-<ons-page id="setting_html" on-device-backbutton="app.menu.open()">
-
+<ons-page id="setting_html" ng-device-backbutton="app.menu.open()">
 
     <ons-toolbar>
         <div class="left">
@@ -11,7 +9,9 @@
             </ons-toolbar-button>
         </div>
 
-        <div class="center">設定</div>
+        <div class="center">
+            {{ 'SETTING' | translate}}
+        </div>
 
     </ons-toolbar>
 
@@ -20,7 +20,7 @@
     <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" ng-click="clear_list()">
             <i class="icon ion-close-circled" size="20px"></i>
-            清除所有清單
+            {{ 'CLEAR_ALL_LIST' | translate}}
         </ons-list-item>
         <ons-list-item modifier="chevron" onclick="location.href = 'mailto:pulipuli.chen@gmail.com?subject=[NCCU-BOOK-CART]'">
             <ons-icon icon="ion-android-mail" size="20px"></ons-icon>
@@ -28,7 +28,7 @@
         </ons-list-item>
         <ons-list-item modifier="chevron" ng-click="share_app()">
             <ons-icon icon="ion-android-share-alt" size="20px"></ons-icon>
-            分享這個APP
+            {{ 'SHARE_APP' | translate}}
         </ons-list-item>
     </ons-list>
 </ons-page>

@@ -76,7 +76,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.load_completed_list = function (_callback) {
 
     $scope.clear_list = function (_callback) {
-        ons.notification.confirm($filter('translate')('CLEAR_ALL_LIST'), function (_answer) {
+        ons.notification.confirm($filter('translate')('CLEAR_ALL_LIST_CONFIRM'), function (_answer) {
             if (_answer === 1) {
                 $scope.DB.empty_table("list");
                 $scope.load_lists(_callback);
@@ -324,6 +324,6 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.scan_barcode = function () {
 
     $scope.share_app = function () {
-        $scope.cordova_social_share($filter('translate')('SHARE_APP'));
+        $scope.cordova_social_share($filter('translate')('SHARE_APP_TEXT'));
     };
 };

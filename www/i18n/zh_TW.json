@@ -16,9 +16,10 @@
     "CLEAR_COMPLETED_LIST": "確定要清空歷史記錄嗎？",
     
     "SETTING": "設定",
-    "CLEAR_ALL_LIST": "確定要清空所有清單嗎？",
+    "CLEAR_ALL_LIST_CONFIRM": "確定要清空所有清單嗎？",
     "SUGGESTION": "提出建議",
-    "SHARE_APP": "我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/",
+    "SHARE_APP": "分享這個APP",
+    "SHARE_APP_TEXT": "我正在使用政大借書籃，也推薦你來用用看喔。下載網址 https://play.google.com/store/",
     
     "ABOUT": "關於作者",
     "AUTHOR_PHONE": "布丁的照片",
