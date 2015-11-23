@@ -3,14 +3,9 @@
 
     <ons-toolbar>
         <div class="left">
-            <!--
-            <ons-toolbar-button ng-click="app.menu.toggleMenu()">
-            -->
             <ons-toolbar-button ng-click="app.menu.open()" class="menu-open">
-            
                 <span class="toolbar-button--quiet navigation-bar__line-height" >
-                    <i class="ion-navicon"
-                       style="font-size:32px; vertical-align:-6px;"></i>
+                    <i class="ion-navicon"></i>
                 </span>
             </ons-toolbar-button>
         </div>
@@ -24,41 +19,41 @@
         </div>
     </ons-toolbar>
 
-<!--
-    <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
-        <ons-button id="search_barcode_button" modifier="large--cta" ng-click="scan_barcode()">{{ 'SCAN_BARCODE' | translate }}</ons-button>
-    </ons-row>
--->
+    <!--
+        <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
+            <ons-button id="search_barcode_button" modifier="large--cta" ng-click="scan_barcode()">{{ 'SCAN_BARCODE' | translate }}</ons-button>
+        </ons-row>
+    -->
 
-            <form id="scan_barcode" ng-submit="add();">
-    <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
+    <form id="scan_barcode" ng-submit="add();">
+        <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
 
-        <ons-col width="120px" ng-click="scan_barcode()">
-        <ons-button id="search_barcode_button" modifier="cta">
+            <ons-col width="120px" ng-click="scan_barcode()">
+                <ons-button id="search_barcode_button" modifier="cta">
 
-      <ons-icon icon="ion-qr-scanner" ></ons-icon>
-        {{ 'SCAN_BARCODE' | translate }}</ons-button>
-    </ons-col>
-        <ons-col>
+                    <ons-icon icon="ion-qr-scanner" ></ons-icon>
+                    {{ 'SCAN_BARCODE' | translate }}</ons-button>
+            </ons-col>
+            <ons-col>
                 <input type="search" class="search-input" id="isbn" name="isbn"
                        value="{{isbn}}"
                        placeholder="輸入ISBN查詢..." />
-                       <!--autofocus--> 
-        </ons-col>
+                <!--autofocus--> 
+            </ons-col>
 
-        <ons-col width="40px">
-            <ons-button modifier="cta" ng-click="search()">
-                <ons-icon icon="fa-search"></ons-icon>
-            </ons-button>
-        </ons-col>
+            <ons-col width="40px">
+                <ons-button modifier="cta" ng-click="search()">
+                    <ons-icon icon="fa-search"></ons-icon>
+                </ons-button>
+            </ons-col>
 
-    </ons-row>
-            </form>
+        </ons-row>
+    </form>
 
 
     <ons-list ng-repeat="location in todo_list">
         <ons-list-item class="location" modifier="chevron" class="list-item-container"  
-                       ng-click="open_map(location.location)" ng-show="location.location != ''">
+                       ng-click="open_map(location.location)" ng-show="location.location !== ''">
             <div class="list-item-left">
                 {{location.location}}
             </div>
@@ -85,9 +80,9 @@
     <!-- ------------------------------------------- -->
 
     <ons-fab class="fab" style="">
-    <label for="isbn" class="fab__icon">
-      <ons-ripple class="ripple" style="display: block; position: absolute;"><span class="ripple__wave"></span></ons-ripple>
-      <ons-icon icon="ion-search" ></ons-icon>
-    </label></ons-fab>
+        <label for="isbn" class="fab__icon">
+            <ons-ripple class="ripple" style="display: block; position: absolute;"><span class="ripple__wave"></span></ons-ripple>
+            <ons-icon icon="ion-search" ></ons-icon>
+        </label></ons-fab>
 
 </ons-page>

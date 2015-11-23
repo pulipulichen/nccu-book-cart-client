@@ -11,3 +11,6 @@ https://build.phonegap.com/apps
 
 # 測試連結
 http://localhost/book-list/www/
+
+# ionicons
+http://ionicons.com/

@@ -3,6 +3,10 @@
     display: none;
 }
 
+ons-page ons-toolbar ons-toolbar-button .ion-navicon {
+    font-size:32px; 
+    vertical-align:-6px;
+}
 
 /**
  * 選單背景反白

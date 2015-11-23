@@ -6,17 +6,17 @@
 
         <div class="left">
             <ons-toolbar-button ng-click="app.menu.open()" class="menu-open">
-            
                 <span class="toolbar-button--quiet navigation-bar__line-height" >
-                    <i class="ion-navicon"
-                       style="font-size:32px; vertical-align:-6px;"></i>
+                    <i class="ion-navicon"></i>
                 </span>
             </ons-toolbar-button>
         </div>
 
         <div class="center">{{ 'COMPLETED_LIST' | translate}}</div>
+        
         <div class="right" ng-click="clear_completed_list()">
-            <ons-toolbar-button><i class="icon ion-close-circled"></i>
+            <ons-toolbar-button>
+                <i class="icon ion-close-circled"></i>
             </ons-toolbar-button>
         </div>
     </ons-toolbar>

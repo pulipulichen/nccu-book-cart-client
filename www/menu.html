@@ -18,9 +18,16 @@
         <ons-list-item ng-click="app.navi.replacePage('completed_list.html', {animation: 'none'});
         load_completed_list();
         menu_click($event);">
-            <i class="icon ion-android-checkbox-outline"></i>
+            <i class="icon ion-ios-checkmark-outline"></i>
             <span class="menu-label">
                 歷史清單
+            </span>
+        </ons-list-item>
+        <ons-list-item ng-click="app.navi.replacePage('setting.html', {animation: 'none'});
+        menu_click($event);">
+            <i class="icon ion-ios-settings"></i>
+            <span class="menu-label">
+                設定
             </span>
         </ons-list-item>
         <ons-list-item ng-click="app.navi.replacePage('about.html', {animation: 'none'});

@@ -3,10 +3,10 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.check_search_enable = function () {
         if ($.trim($scope.isbn) !== "") {
-            
+
         }
         else {
-            
+
         }
     };
 
@@ -81,15 +81,12 @@ var _app_factory_book_cart = function ($scope, $filter) {
                 + "FROM list WHERE checked = 1 ORDER BY update_timestamp DESC"
                 , _db_callback);
     };  //$scope.load_completed_list = function (_callback) {
+
     $scope.clear_list = function (_callback) {
-        ons.notification.confirm({
-            message: "確定要清空借書籃嗎？",
-            callback: function (_answer) {
-                //console.log(_answer);
-                if (_answer === 1) {
-                    $scope.DB.empty_table("list");
-                    $scope.load_lists(_callback);
-                }
+        ons.notification.confirm("確定要清空所有清單嗎？", function (_answer) {
+            if (_answer === 1) {
+                $scope.DB.empty_table("list");
+                $scope.load_lists(_callback);
             }
         });
     };  //$scope.clear_list = function (_callback) {
@@ -136,15 +133,15 @@ var _app_factory_book_cart = function ($scope, $filter) {
 //        $scope.has_item(_isbn, function (_result, _item) {
 //            //console.log("_.add" + _result);
 //            if (_result === false) {
-                $scope.request_add(_isbn, function () {
-                    $scope.load_todo_list(function (_data) {
-                        //app.navi.pushPage('list.html');
-                        console.log(_data);
-                        $scope.isbn = "";
-                        $scope.$digest();
-                        $.trigger_callback(_callback);
-                    });
-                });
+        $scope.request_add(_isbn, function () {
+            $scope.load_todo_list(function (_data) {
+                //app.navi.pushPage('list.html');
+                console.log(_data);
+                $scope.isbn = "";
+                $scope.$digest();
+                $.trigger_callback(_callback);
+            });
+        });
 //            }
 //            else {
 //                $scope.has_item_notify(_item, _callback);
@@ -254,7 +251,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             _loop(0);
         });
     };  //$scope.request_add = function (_isbn, _callback)
-    
+
     $scope.has_item = function (_call_number, _callback) {
         if (_call_number === "") {
             _callback(false);
@@ -276,7 +273,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
     $scope.open_map = function (_location) {
         //ons.notification.alert(_location);
         var _src = $scope.location_image[_location];
-        
+
         if (_src.substr(0, $scope.CONFIG.proxy_url.length) === $scope.CONFIG.proxy_url) {
             $scope.map_title = _location;
             $scope.map_src = _src;

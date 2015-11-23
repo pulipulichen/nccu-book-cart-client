@@ -1,0 +1,28 @@
+
+<ons-page id="setting_html" on-device-backbutton="app.menu.open()">
+
+
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button ng-click="app.menu.open()" class="menu-open">
+                <span class="toolbar-button--quiet navigation-bar__line-height" >
+                    <i class="ion-navicon"></i>
+                </span>
+            </ons-toolbar-button>
+        </div>
+        
+        <div class="center">設定</div>
+        
+    </ons-toolbar>
+
+    <!-- --------------------------------------------------------- -->
+
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" ng-click="clear_list()">
+          清除所有清單
+        </ons-list-item>
+          <ons-list-item modifier="chevron" ng-click="share_app()">
+          分享這個APP
+        </ons-list-item>
+      </ons-list>
+</ons-page>
