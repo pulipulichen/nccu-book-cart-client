@@ -1,3 +1,7 @@
 .now-loading-modal {
     display: none;
 }
+
+label.checkbox input[type="checkbox"] {
+    display:none;
+}

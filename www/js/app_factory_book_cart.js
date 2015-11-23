@@ -190,7 +190,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             var _loop = function (_i) {
                 //alert("request_add loop " + _i);
                 if (_i < _data_list.length) {
-                    alert("request_add loop _data_list[_i]" + _i);
+                    //alert("request_add loop _data_list[_i]" + _i);
                     var _data = _data_list[_i];
 
                     var _author = $.trim(_data.author);
@@ -266,10 +266,16 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.open_map = function (_location) {
         //ons.notification.alert(_location);
-        $scope.map_title = _location;
-        $scope.map_src = $scope.location_image[_location];
+        var _src = $scope.location_image[_location];
         
-        app.navi.pushPage("map.html");
+        if (_src.substr(0, $scope.CONFIG.proxy_url.length) === $scope.CONFIG.proxy_url) {
+            $scope.map_title = _location;
+            $scope.map_src = _src;
+            app.navi.pushPage("map.html");
+        }
+        else {
+            window.open(_src, "_system");
+        }
     };  //$scope.open_map = function (_location) {
 
     $scope.complete_item = function (_id, _callback) {

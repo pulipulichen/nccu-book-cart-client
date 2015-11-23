@@ -33,7 +33,8 @@ var _app_factory_config = function ($scope) {
             "綜圖2F西文": $scope.CONFIG.proxy_url + "img/map/cclsl_cht_2f.png",
             "商圖": $scope.CONFIG.proxy_url + "img/map/cbl_cht.png",
             "商圖附件": $scope.CONFIG.proxy_url + "img/map/cbl_cht.png",
-            "傳圖": $scope.CONFIG.proxy_url + "img/map/cjl_cht.png"
+            "傳圖": $scope.CONFIG.proxy_url + "img/map/cjl_cht.png",
+            "總圖撤架區(點此申請)": "https://subweb.lib.nccu.edu.tw/offshelf/?m=1202"
         };
         $scope.map_title = "";
         $scope.map_src = "";
