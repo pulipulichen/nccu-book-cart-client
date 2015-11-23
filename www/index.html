@@ -90,7 +90,10 @@
 
 // --------------------------
 
-                var _app_controller = function ($scope, $filter) {
+                app.controller('app_controller'
+                        , ['$scope',
+                            '$filter',
+                            function ($scope, $filter) {
                     
 
                     _app_factory_config($scope);
@@ -107,12 +110,7 @@
                     // -----------------------------------
 
                     _app_ready($scope);
-                };
-
-                app.controller('app_controller'
-                        , ['$scope',
-                            '$filter',
-                            _app_controller]);
+                }]);
     </script>
 
     <script src="cordova.js"></script>

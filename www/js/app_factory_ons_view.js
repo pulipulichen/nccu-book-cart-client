@@ -30,7 +30,7 @@ var _app_factory_ons_view = function ($scope) {
     };
 
     $scope.exit_app = function () {
-        if (typeof(cordova) !== "undefined") {
+        if (typeof (cordova) !== "undefined") {
             navigator.app.exitApp();
         }
         else {
@@ -44,4 +44,25 @@ var _app_factory_ons_view = function ($scope) {
     if (ons.platform.isWebView()) {
         $("body").addClass("web-view");
     }
+
+    $scope.setup_menu_swipeable = function () {
+        var _swipeable_width = 400;
+        var _menu_swipeable = true;
+        var _set_menu_swipeable = function () {
+            // This will execute whenever the window is resized
+            //$(window).height(); // New height
+            var _width = $(window).width(); // New width
+            if (_width > _swipeable_width && _menu_swipeable === true) {
+                _menu_swipeable = false;
+                app.menu.setSwipeable(false);
+            }
+            else if (_width < _swipeable_width + 1 && _menu_swipeable === false) {
+                _menu_swipeable = true;
+                app.menu.setSwipeable(true);
+            }
+        };
+        $(window).resize(_set_menu_swipeable);
+        _set_menu_swipeable();
+    };
+
 };

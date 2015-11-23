@@ -10,5 +10,9 @@
     "TODO_LIST": "借書清單",
     "TODO_LIST_EMPTY_CONFIRM": "您確定要清空借書清單嗎？",
     
-    "COMPLETED_LIST": "歷史清單"
+    "COMPLETED_LIST": "歷史清單",
+    
+    "ONS.OK": "確定",
+    "ONS.YES": "確定",
+    "ONS.NO": "取消"
 }
