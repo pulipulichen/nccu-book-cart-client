@@ -10,19 +10,23 @@
                 </span>
             </ons-toolbar-button>
         </div>
-        
+
         <div class="center">設定</div>
-        
+
     </ons-toolbar>
 
     <!-- --------------------------------------------------------- -->
 
-      <ons-list modifier="inset" class="settings-list">
+    <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" ng-click="clear_list()">
-          清除所有清單
+            清除所有清單
         </ons-list-item>
-          <ons-list-item modifier="chevron" ng-click="share_app()">
-          分享這個APP
+        <ons-list-item modifier="chevron" onclick="location.href = 'mailto:pulipuli.chen@gmail.com?subject=[NCCU-BOOK-CART]'">
+            <ons-icon icon="ion-android-mail" size="20px"></ons-icon>
+            {{ 'SUGGESTION' | translate}}
         </ons-list-item>
-      </ons-list>
+        <ons-list-item modifier="chevron" ng-click="share_app()">
+            分享這個APP
+        </ons-list-item>
+    </ons-list>
 </ons-page>

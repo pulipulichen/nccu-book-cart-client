@@ -5,6 +5,9 @@
                 <i class="icon ion-arrow-left-a"></i>
             </ons-toolbar-button>
         </div>
+        
+        <div class="center">{{ 'TITLE' | translate}}</div>
+        
     </ons-toolbar>
     <ons-list>
         <ons-list-item ng-click="app.navi.replacePage('main.html', {animation: 'none'});
@@ -12,7 +15,7 @@
         menu_click($event);" class="menu-active">
             <i class="icon ion-ios-list-outline"></i>
             <span class="menu-label">
-                借書清單
+                {{ 'TODO_LIST' | translate}}
             </span>
         </ons-list-item>
         <ons-list-item ng-click="app.navi.replacePage('completed_list.html', {animation: 'none'});
@@ -20,28 +23,28 @@
         menu_click($event);">
             <i class="icon ion-ios-checkmark-outline"></i>
             <span class="menu-label">
-                歷史清單
+                {{ 'COMPLETED_LIST' | translate}}
             </span>
         </ons-list-item>
         <ons-list-item ng-click="app.navi.replacePage('setting.html', {animation: 'none'});
         menu_click($event);">
             <i class="icon ion-ios-settings"></i>
             <span class="menu-label">
-                設定
+                {{ 'SETTING' | translate}}
             </span>
         </ons-list-item>
         <ons-list-item ng-click="app.navi.replacePage('about.html', {animation: 'none'});
         menu_click($event);">
             <i class="icon ion-ios-information-outline"></i>
             <span class="menu-label">
-                關於作者
+                {{ 'ABOUT' | translate}}
             </span>
         </ons-list-item>
 
         <ons-list-item ng-click="exit_app();">
             <i class="icon ion-android-exit"></i>
             <span class="menu-label">
-                離開程式
+                {{ 'EXIT_APP' | translate}}
             </span>
         </ons-list-item>
     </ons-list>

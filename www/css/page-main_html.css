@@ -21,3 +21,16 @@ body.web-view .search-input {
 ons-list-item.location {
     background-color: #CCC;
 }
+
+ons-list ons-list-item.list-item-container .title {
+    font-weight: bold;
+}
+
+ons-list ons-list-item.list-item-container .call_number {
+    font-size: smaller;color: orange;
+}
+
+ons-list ons-list-item.list-item-container .update_timestamp,
+ons-list ons-list-item.list-item-container .id {
+    display: none;
+}

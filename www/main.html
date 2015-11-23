@@ -1,4 +1,3 @@
-
 <ons-page id="main_html" on-device-backbutton="main_back()">
 
     <ons-toolbar>
@@ -18,26 +17,20 @@
             </ons-toolbar-button>
         </div>
     </ons-toolbar>
-
-    <!--
-        <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
-            <ons-button id="search_barcode_button" modifier="large--cta" ng-click="scan_barcode()">{{ 'SCAN_BARCODE' | translate }}</ons-button>
-        </ons-row>
-    -->
-
+    
     <form id="scan_barcode" ng-submit="add();">
         <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
 
             <ons-col width="120px" ng-click="scan_barcode()">
                 <ons-button id="search_barcode_button" modifier="cta">
-
                     <ons-icon icon="ion-qr-scanner" ></ons-icon>
-                    {{ 'SCAN_BARCODE' | translate }}</ons-button>
+                    {{ 'SCAN_BARCODE' | translate }}
+                </ons-button>
             </ons-col>
             <ons-col>
                 <input type="search" class="search-input" id="isbn" name="isbn"
                        value="{{isbn}}"
-                       placeholder="輸入ISBN查詢..." />
+                       placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" />
                 <!--autofocus--> 
             </ons-col>
 
@@ -67,12 +60,13 @@
 
             <label class="checkbox checkbox--list-item">
                 <input type="checkbox" />
-                <div class="checkbox__checkmark checkbox--list-item__checkmark">
-                </div>
-                <span class="title" style="font-weight: bold;">{{item.title}}</span>
-                <span class="call_number" style="font-size: smaller;color: orange;">{{item.call_number}}</span>
-                <span class="update_timestamp" style="display:none;">{{item.update_timestamp}}</span>
-                <span class="id" style="display:none;">{{item.id}}</span>
+                <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+                <span class="title">
+                    {{item.title}}
+                </span>
+                <span class="call_number">
+                    {{item.call_number}}
+                </span>
             </label>
         </ons-list-item>
     </ons-list>
@@ -81,7 +75,7 @@
 
     <ons-fab class="fab" style="">
         <label for="isbn" class="fab__icon">
-            <ons-ripple class="ripple" style="display: block; position: absolute;"><span class="ripple__wave"></span></ons-ripple>
+            <ons-ripple class="ripple"><span class="rippledisplay: block; position: absolute;__wave"></span></ons-ripple>
             <ons-icon icon="ion-search" ></ons-icon>
         </label></ons-fab>
 

@@ -46,9 +46,9 @@
       -- ---------------------------------------- -->
     <body ng-controller="app_controller">
 
-        <div ons-loading-placeholder="menu" style="text-align:center;">
-            <img src="img/loading.svg" style="position:fixed;top: calc(50% - 60px);left: calc(50% - 60px)" /> 
-        </div>
+    <div ons-loading-placeholder="menu" style="text-align:center;">
+        <img src="img/loading.svg" style="position:fixed;top: calc(50% - 60px);left: calc(50% - 60px)" /> 
+    </div>
 
 
     <ons-modal var="modal" class="now-loading-modal">
@@ -81,46 +81,44 @@
     <script src="js/cordova_social_share.js"></script>
     
     <script type="text/javascript">
-                var app = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
+        var app = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
 
-                /**
-                 * 翻譯
-                 * @param {type} param
-                 */
-                app.config(function ($translateProvider) {
-                    $translateProvider.preferredLanguage('zh_TW');
-                    $translateProvider.useStaticFilesLoader({
-                        prefix: 'i18n/',
-                        suffix: '.json'
-                    });
-                });
+        /**
+         * 翻譯
+         * @param {type} param
+         */
+        app.config(function ($translateProvider) {
+            $translateProvider.preferredLanguage('zh_TW');
+            $translateProvider.useStaticFilesLoader({
+                prefix: 'i18n/',
+                suffix: '.json'
+            });
+        });
 
-// --------------------------
+        app.controller('app_controller'
+                , ['$scope',
+                    '$filter',
+                    function ($scope, $filter) {
 
-                app.controller('app_controller'
-                        , ['$scope',
-                            '$filter',
-                            function ($scope, $filter) {
-                    
 
-                    _app_factory_config($scope);
-                    
-                    _app_factory_db_utils($scope);
-                    _app_factory_db($scope);
+            _app_factory_config($scope);
 
-                    _app_factory_book_cart($scope, $filter);
+            _app_factory_db_utils($scope);
+            _app_factory_db($scope);
 
-                    _app_factory_ons_view($scope);
+            _app_factory_book_cart($scope, $filter);
 
-                    _app_factory_ons_utils($scope, $filter);
-                    _app_factory_jquery_utils($scope);
-                    
-                    cordova_barcode_scan($scope, $filter);
-                    cordova_social_share($scope, $filter);
-                    // -----------------------------------
+            _app_factory_ons_view($scope);
 
-                    _app_ready($scope);
-                }]);
+            _app_factory_ons_utils($scope, $filter);
+            _app_factory_jquery_utils($scope);
+
+            cordova_barcode_scan($scope, $filter);
+            cordova_social_share($scope, $filter);
+            // -----------------------------------
+
+            _app_ready($scope);
+        }]);
     </script>
 
     <script src="cordova.js"></script>

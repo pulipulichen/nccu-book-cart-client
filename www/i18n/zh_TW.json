@@ -1,17 +1,29 @@
 {
     "TITLE": "政大借書籃",
     
-    "SCAN_BARCODE": "掃描條碼",
-    
-    "SEARCH": "搜尋",
-    
     "BOOK_LIST": "借書清單",
 
     "TODO_LIST": "借書清單",
     "TODO_LIST_EMPTY_CONFIRM": "您確定要清空借書清單嗎？",
+    "SCAN_BARCODE": "掃描條碼",
+    "SEARCH": "搜尋",
+    "SEARCH_PLACEHOLDER": "輸入ISBN查詢...",
     
     "COMPLETED_LIST": "歷史清單",
     
+    "SETTING": "設定",
+    "SUGGESTION": "提出建議",
+    
+    "ABOUT": "關於作者",
+    "AUTHOR_NAME": "布丁布丁吃布丁",
+    "AUTHOR_ID": "Tim (Puudding)",
+    "AUTHOR_DESC": "國立政治大學圖書資訊與檔案學研究所博士生，興趣是用程式來讓生活與工作更加便利，但是也應該寫寫論文才能夠順利畢業。",
+    "VISIT_BLOG": "參觀我的部落格",
+    "DONATE": "助我畢業",
+    
+    "EXIT_APP": "離開程式",
+    
+    "ONS.TITLE": "政大借書籃",
     "ONS.OK": "確定",
     "ONS.YES": "確定",
     "ONS.NO": "取消"

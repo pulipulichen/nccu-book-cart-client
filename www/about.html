@@ -10,7 +10,9 @@
                 </span>
             </ons-toolbar-button>
         </div>
-        <div class="center">關於作者</div>
+        <div class="center">
+            {{ 'ABOUT' | translate}}
+        </div>
 
     </ons-toolbar>
 
@@ -19,29 +21,30 @@
     <div class="profile-card">
 
         <img src="img/pudding-icon.svg" class="profile-image"/>
-        <div class="profile-name">布丁布丁吃布丁</div>
-        <div class="profile-id">Tim (Puudding)</div>
-        <div class="profile-desc">國立政治大學圖書資訊與檔案學研究所博士生，興趣是用程式來讓生活與工作更加便利，但是也應該寫寫論文才能夠順利畢業。</div>
+        <div class="profile-name">
+            {{ 'AUTHOR_NAME' | translate}}
+        </div>
+        <div class="profile-id">
+            {{ 'AUTHOR_ID' | translate}}
+        </div>
+        <div class="profile-desc">
+            {{ 'AUTHOR_DESC' | translate}}
+        </div>
 
     </div>
 
     <ons-list modifier="inset" style="margin-top: 10px">
 
-        <ons-list-item modifier="chevron" onclick="location.href = 'mailto:pulipuli.chen@gmail.com?subject=[NCCU-BOOK-CART]'">
-            <ons-icon icon="ion-android-mail" size="20px"></ons-icon>
-            提出建議
-        </ons-list-item>
-
         <ons-list-item modifier="chevron" onclick="window.open('http://pulipuli.blogspot.tw', '_system')">
             <ons-icon icon="ion-social-rss" size="20px"></ons-icon>
-            參觀我的Blog
+            {{ 'VISIT_BLOG' | translate}}
         </ons-list-item>
 
         <ons-list-item modifier="chevron" onclick="$(this).find('form').submit();">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_system">
 
                 <ons-icon icon="ion-card" size="20px"></ons-icon>
-                助我畢業
+                {{ 'DONATE' | translate}}
 
                 <!-- 以下不顯示 -->
                 <input type="hidden" name="cmd" value="_s-xclick">

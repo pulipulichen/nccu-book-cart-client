@@ -10,6 +10,11 @@ body.web-view .fab .ons-icon {
     right:25px;
 }
 
+.fab .ripple {
+    display: block;
+    position: absolute;
+}
+
 @media screen and (max-height: 200px) {
     .fab {
         display: none;
