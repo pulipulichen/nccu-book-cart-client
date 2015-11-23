@@ -30,5 +30,7 @@
     "ONS.TITLE": "政大借書籃",
     "ONS.OK": "確定",
     "ONS.YES": "確定",
-    "ONS.NO": "取消"
+    "ONS.NO": "取消",
+    
+    "ONLY_PHONE_AVAILABLE": "只有手機上才能執行此功能"
 }

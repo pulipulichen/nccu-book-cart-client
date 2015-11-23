@@ -20,7 +20,7 @@ var cordova_barcode_scan = function ($scope, $filter) {
             _callback(_mock_text);
         }
         else {
-            ons.notification.alert("只有手機上才能執行此功能");
+            ons.notification.alert($filter('translate')('ONLY_PHONE_AVAILABLE'));
         }
     };
 };
