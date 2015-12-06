@@ -297,27 +297,32 @@ var _app_factory_book_cart = function ($scope, $filter) {
         //ons.notification.alert(_location);
         var _src = $scope.location_image[_location];
 
-//        if (_src.substr(0, $scope.CONFIG.proxy_url.length) === $scope.CONFIG.proxy_url) {
-//            $scope.map_title = _location;
-//            //$scope.map_src = _src;
-//            
-//        }
-//        else {
-//            //window.open(_src, "_system");
-//            //window.open(_src, 'map_iframe', 'EnableViewPortScale=yes')
-//        }
+        if (_src.substr(0, $scope.CONFIG.proxy_url.length) === $scope.CONFIG.proxy_url) {
+            $scope.map_title = _location;
+            $scope.map_src = _src;
+            app.navi.pushPage("map.html", {
+                'onTransitionEnd': function () {
+//                    $(".map_image:not(.inited)").panzoom();
+//                    $(".map_image:not(.inited)").addClass("inited");
+                }
+            });
+        }
+        else {
+            window.open(_src, "_blank");
+        }
         
-        $scope.map_title = _location;
+        //$scope.map_title = _location;
         
-        app.navi.pushPage("map.html", {
-            onTransitionEnd: function () {
-
-                //console.log(($(document).height() - 50) + "px");
-                $("#map_iframe").attr("height", ($(document).height() - 44));
-                window.open(_src, 'map_iframe', 'EnableViewPortScale=yes');
-            }
-        });
+//        app.navi.pushPage("map.html", {
+//            onTransitionEnd: function () {
+//
+//                //console.log(($(document).height() - 50) + "px");
+//                $("#map_iframe").attr("height", ($(document).height() - 44));
+//                window.open(_src, 'map_iframe', 'EnableViewPortScale=yes');
+//            }
+//        });
     };  //$scope.open_map = function (_location) {
+    
 
     $scope.open_item_page = function (_isbn) {
         var _url = "http://jenda.lib.nccu.edu.tw/search~S5*cht/?searchtype=i&searcharg=" + _isbn + "&searchscope=5&SORT=DZ&extended=0&availlim=1=&searchorigarg=X%7Bu8CC8%7D%7Bu4F2F%7D%7Bu65AF%7D%7Bu50B3%7D%26SORT%3DD#.Vk6H3HYrLRY";
