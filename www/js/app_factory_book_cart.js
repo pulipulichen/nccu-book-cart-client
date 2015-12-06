@@ -248,7 +248,9 @@ var _app_factory_book_cart = function ($scope, $filter) {
                         else {
                             //$scope.has_item_notify(_item, _callback);
                             //alert("request_add [" + _i + "] 已經有資料，準備下一輪");
-                            _has_item_list.push(_item);
+                            if ($.inArray(_item, _has_item_list) === -1) {
+                                _has_item_list.push(_item);
+                            }
                             _i++;
                             _loop(_i);
                         }
