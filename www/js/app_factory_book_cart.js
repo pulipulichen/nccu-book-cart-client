@@ -154,11 +154,13 @@ var _app_factory_book_cart = function ($scope, $filter) {
 //            if (_result === false) {
 
         //$scope.isbn = "";
-        $scope.request_add(_isbn, function () {
+        $scope.request_add(_isbn, function (_error) {
             $scope.load_todo_list(function (_data) {
                 //app.navi.pushPage('list.html');
                 //console.log(_data);
-                $("#isbn").val("");
+                if (_error === undefined) {
+                    $("#isbn").val("");
+                }
                 $scope.$digest();
                 $.trigger_callback(_callback);
             });
@@ -206,7 +208,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
             if (typeof (_data_list.error) === "string") {
                 modal.hide();
                 ons.notification.alert($filter('translate')(_data_list.error));
-                $.trigger_callback(_callback);
+                $.trigger_callback(_callback, _data_list.error);
                 return;
             }
 
@@ -325,11 +327,17 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.open_map = function (_location) {
     
     $scope.search_keydown = function ($event) {
-        if ($event.which === 13) {
+        if ($event.which === 13 || $event.which === 9) {
             //$($even1111t.target).parents("form").submit();
             $scope.add();
             $event.preventDefault();
             $event.stopPropagation();
+        }
+    };
+    
+    $scope.focus_search_input = function () {
+        if ($scope.isbn !== "") {
+            $scope.add();
         }
     };
 

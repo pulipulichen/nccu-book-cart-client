@@ -9,8 +9,8 @@ var _app_factory_jquery_utils = function ($scope) {
         console.log(_msg);
     };
 
-    $.trigger_callback = function (_callback) {
+    $.trigger_callback = function (_callback, _params) {
         if (typeof (_callback) === "function")
-            _callback();
+            _callback(_params);
     };
 };
