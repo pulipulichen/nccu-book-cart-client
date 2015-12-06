@@ -14,6 +14,7 @@ var cordova_barcode_scan = function ($scope, $filter) {
                     },
                     function (error) {
                         ons.notification.alert("Scanning failed: " + error);
+                        _callback();
                     }
             );
         }

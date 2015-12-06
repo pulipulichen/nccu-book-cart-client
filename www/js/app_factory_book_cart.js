@@ -84,12 +84,24 @@ var _app_factory_book_cart = function ($scope, $filter) {
         });
     };  //$scope.clear_list = function (_callback) {
 
-    $scope.clear_todo_list = function (_callback) {
-        ons.notification.confirm($filter('translate')('CLEAR_TODO_LIST'),
+    $scope.clear_todo_list = function (_id, _callback) {
+        if (typeof(_id) === "function") {
+            _callback = _id;
+            _id = undefined;
+        }
+        
+        var _lang = 'CLEAR_TODO_LIST';
+        var _sql = "DELETE FROM list WHERE checked = 0";
+        if (_id !== undefined) {
+            var _lang = 'CLEAR_ITEM';
+            var _sql = "DELETE FROM list WHERE checked = 0 AND id = " + _id;
+        }
+        
+        ons.notification.confirm($filter('translate')(_lang),
                 function (_answer) {
                     //console.log(_answer);
                     if (_answer === 1) {
-                        $scope.DB.exec("DELETE FROM list WHERE checked = 0", function () {
+                        $scope.DB.exec(_sql, function () {
                             $scope.load_todo_list(_callback);
                         });
                     }
@@ -97,16 +109,29 @@ var _app_factory_book_cart = function ($scope, $filter) {
         );
     };  //$scope.clear_todo_list = function (_callback) {
 
-    $scope.clear_completed_list = function (_callback) {
-        ons.notification.confirm($filter('translate')('CLEAR_COMPLETED_LIST'),
+    $scope.clear_completed_list = function (_id, _callback) {
+        if (typeof(_id) === "function") {
+            _callback = _id;
+            _id = undefined;
+        }
+        
+        var _lang = 'CLEAR_COMPLETED_LIST';
+        var _sql = "DELETE FROM list WHERE checked = 1";
+        if (_id !== undefined) {
+            var _lang = 'CLEAR_ITEM';
+            var _sql = "DELETE FROM list WHERE checked = 1 AND id = " + _id;
+        }
+        
+        ons.notification.confirm($filter('translate')(_lang),
                 function (_answer) {
                     //console.log(_answer);
                     if (_answer === 1) {
-                        $scope.DB.exec("DELETE FROM list WHERE checked = 1", function () {
+                        $scope.DB.exec(_sql, function () {
                             $scope.load_completed_list(_callback);
                         });
                     }
-                });
+                }
+        );
     };  //$scope.clear_completed_list = function (_callback) {
 
     $scope.add = function (_isbn, _callback) {
@@ -118,6 +143,11 @@ var _app_factory_book_cart = function ($scope, $filter) {
         if (typeof (_isbn) !== "string") {
             _isbn = $.trim($('[name="isbn"]').val());
         }
+
+        if (_isbn === "") {
+            return false;
+        }
+
 //        console.log(_isbn);
 //        $scope.has_item(_isbn, function (_result, _item) {
 //            //console.log("_.add" + _result);
@@ -279,8 +309,10 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };
 
     $scope.complete_item = function (_id, $event, _callback) {
-        $event.preventDefault();
-        $event.stopPropagation();
+        if ($event !== undefined) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
         var _time = (new Date()).getTime();
         $scope.DB.exec("update list SET checked = 1, update_timestamp = " + _time
                 + " WHERE id = " + _id, function () {
@@ -291,9 +323,11 @@ var _app_factory_book_cart = function ($scope, $filter) {
     };  //$scope.complete_item = function (_id, _callback) {
 
     $scope.undo_item = function (_id, $event, _callback) {
-
-        $event.preventDefault();
-        $event.stopPropagation();
+        if ($event !== undefined) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
+            
         var _time = (new Date()).getTime();
         $scope.DB.exec("update list SET checked = 0, update_timestamp = " + _time
                 + " WHERE id = " + _id, function () {
@@ -313,14 +347,67 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
     $scope.scan_barcode = function () {
         var _search = function (_isbn) {
-            $scope.isbn = _isbn;
-            $scope.add(_isbn);
+            if (_isbn !== undefined) {
+                $scope.isbn = _isbn;
+                $scope.add(_isbn);
+            }
         };
 
-        $scope.cordova_barcode_scan(_search, $scope.mock_isbn);
+        $scope.cordova_barcode_scan(_search, $scope.mock_url);
     };  //$scope.scan_barcode = function () {
 
     $scope.share_app = function () {
         $scope.cordova_social_share($filter('translate')('SHARE_APP_TEXT'));
+    };
+    
+    // ---------------------------------
+
+    ons.createPopover('todo_list_submenu_popover.html').then(function (popover) {
+        $scope.todo_list_popover = popover;
+    });
+    
+    ons.createPopover('completed_list_submenu_popover.html').then(function (popover) {
+        $scope.completed_list_popover = popover;
+    });
+
+    $scope.popover_item_id;
+    $scope.popover_item_isbn;
+    
+    $scope.show_todo_list_popover = function (_id, _isbn, _e) {
+        $scope.popover_item_id = _id;
+        $scope.popover_item_isbn = _isbn;
+        $scope.todo_list_popover.show(_e);
+    };
+    
+    $scope.show_completed_list_popover = function (_id, _isbn, _e) {
+        $scope.popover_item_id = _id;
+        $scope.popover_item_isbn = _isbn;
+        $scope.completed_list_popover.show(_e);
+    };
+    
+    $scope.popover_complete_item = function() {
+        $scope.complete_item($scope.popover_item_id);
+        $scope.todo_list_popover.hide();
+    };
+    
+    $scope.popover_undo_item = function() {
+        $scope.undo_item($scope.popover_item_id);
+        $scope.completed_list_popover.hide();
+    };
+    
+    $scope.popover_clear_todo_list = function() {
+        $scope.clear_todo_list($scope.popover_item_id);
+        $scope.todo_list_popover.hide();
+    };
+    
+    $scope.popover_clear_completed_list = function() {
+        $scope.clear_completed_list($scope.popover_item_id);
+        $scope.completed_list_popover.hide();
+    };
+    
+    $scope.popover_open_item_page = function () {
+        $scope.open_item_page($scope.popover_item_isbn);
+        $scope.todo_list_popover.hide();
+        $scope.completed_list_popover.hide();
     };
 };

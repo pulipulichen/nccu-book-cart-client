@@ -21,14 +21,25 @@
     <form id="scan_barcode" ng-submit="add();">
         <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
 
+
             <ons-col width="120px" ng-click="scan_barcode()">
                 <ons-button id="search_barcode_button" modifier="cta">
                     <ons-icon icon="ion-qr-scanner" ></ons-icon>
+
                     {{ 'SCAN_BARCODE' | translate }}
                 </ons-button>
             </ons-col>
+            <!--
+            <ons-col width="120px" ng-click="scan_barcode()">
+                <ons-button id="search_barcode_button" modifier="cta">
+                    <ons-icon icon="ion-ios-barcode-outline" ></ons-icon>
+                    
+                    {{ 'SCAN_BARCODE' | translate }}
+                </ons-button>
+            </ons-col>
+            -->
             <ons-col>
-                <input type="number" class="search-input" id="isbn" name="isbn"
+                <input type="text" class="search-input" id="isbn" name="isbn"
                        value="{{isbn}}"
                        placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" />
                 <!--autofocus--> 
@@ -54,17 +65,25 @@
             </div>
         </ons-list-item>
 
-        <ons-list-item modifier="tappable chevron" 
+        <ons-list-item modifier="tappable" 
                        ng-repeat="item in location.items"
-                       ng-click="open_item_page(item.isbn)"
                        class="list-item-container">
-            <ons-icon icon="ion-ios-circle-outline" size="20px" ng-click="complete_item(item.id, $event)"></ons-icon>
-            <span class="title">
-                {{item.title}}
-            </span>
-            <span class="call_number">
-                {{item.call_number}}
-            </span>
+            <ons-row>
+                <ons-col ng-click="complete_item(item.id, $event)">
+                    <ons-icon icon="ion-ios-circle-outline" size="20px"></ons-icon>
+                    <span class="title">
+                        {{item.title}}
+                    </span>
+                    <span class="call_number">
+                        {{item.call_number}}
+                    </span>
+                </ons-col>
+                <ons-col width="50px" align="right"
+                         ng-click="show_todo_list_popover(item.id, item.isbn, $event)">
+                    <ons-icon icon="ion-ios-more" ></ons-icon>
+                </ons-col>
+            </ons-row>
+
         </ons-list-item>
     </ons-list>
 
@@ -75,5 +94,4 @@
             <ons-ripple class="ripple"><span class="rippledisplay: block; position: absolute;__wave"></span></ons-ripple>
             <ons-icon icon="ion-search" ></ons-icon>
         </label></ons-fab>
-
 </ons-page>

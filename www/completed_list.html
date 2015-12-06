@@ -21,18 +21,25 @@
     <!-- --------------------------------------------------------- -->
 
     <ons-list>
-        <ons-list-item modifier="tappable chevron" 
+        <ons-list-item modifier="tappable" 
                        class="list-item-container"
                        ng-repeat="item in completed_list" 
-                       ng-class="item_id_{{item.id}}" 
-                       ng-click="open_item_page(item.isbn)">
-            <ons-icon icon="ion-ios-checkmark-outline" size="20px" ng-click="undo_item(item.id, $event)" ></ons-icon>
-            <span class="title">
-                {{item.title}}
-            </span>
-            <span class="call_number">
-                {{item.call_number}}
-            </span>
+                       ng-class="item_id_{{item.id}}" >
+            <ons-row>
+                <ons-col ng-click="undo_item(item.id, $event)">
+                    <ons-icon icon="ion-ios-checkmark-outline" size="20px" ng-click="undo_item(item.id, $event)" ></ons-icon>
+                    <span class="title">
+                        {{item.title}}
+                    </span>
+                    <span class="call_number">
+                        {{item.call_number}}
+                    </span>
+                </ons-col>
+                <ons-col width="50px" align="right"
+                         ng-click="show_completed_list_popover(item.id, item.isbn, $event)">
+                    <ons-icon icon="ion-ios-more" ></ons-icon>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
     </ons-list>
 </ons-page>

@@ -2,7 +2,8 @@ var _app_factory_config = function ($scope) {
     $scope.config_init = function () {
 
         $scope.CONFIG = {
-            "proxy_url": "http://public-nccu-book-cart-2015.dlll.nccu.edu.tw/nccu-book-cart-server/",
+            //"proxy_url": "http://public-nccu-book-cart-2015.dlll.nccu.edu.tw/nccu-book-cart-server/",
+            "proxy_url": "http://pulipuli.tk/nccu-book-cart-server/",
             "test_mode": false
         };
 
@@ -18,6 +19,7 @@ var _app_factory_config = function ($scope) {
         $scope.completed_list = [];
         //$scope.isbn = "";
         $scope.mock_isbn = "9789862168370";  //賈伯斯傳
+        $scope.mock_url = "http://jenda.lib.nccu.edu.tw/search~S5*cht?/X{u8CC8}{u4F2F}{u65AF}{u50B3}&SORT=D/X{u8CC8}{u4F2F}{u65AF}{u50B3}&SORT=D&SUBKEY=賈伯斯傳/1%2C29%2C29%2CB/frameset&FF=X{u8CC8}{u4F2F}{u65AF}{u50B3}&SORT=D&1%2C1%2C#.VmP-GxkVHqA";  //賈伯斯傳
         //$scope.isbn = $scope.mock_isbn; //備用
 
         $scope.location_image = {
