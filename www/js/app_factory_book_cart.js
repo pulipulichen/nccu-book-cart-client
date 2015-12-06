@@ -297,14 +297,26 @@ var _app_factory_book_cart = function ($scope, $filter) {
         //ons.notification.alert(_location);
         var _src = $scope.location_image[_location];
 
-        if (_src.substr(0, $scope.CONFIG.proxy_url.length) === $scope.CONFIG.proxy_url) {
-            $scope.map_title = _location;
-            $scope.map_src = _src;
-            app.navi.pushPage("map.html");
-        }
-        else {
-            window.open(_src, "_system");
-        }
+//        if (_src.substr(0, $scope.CONFIG.proxy_url.length) === $scope.CONFIG.proxy_url) {
+//            $scope.map_title = _location;
+//            //$scope.map_src = _src;
+//            
+//        }
+//        else {
+//            //window.open(_src, "_system");
+//            //window.open(_src, 'map_iframe', 'EnableViewPortScale=yes')
+//        }
+        
+        $scope.map_title = _location;
+        
+        app.navi.pushPage("map.html", {
+            onTransitionEnd: function () {
+
+                //console.log(($(document).height() - 50) + "px");
+                $("#map_iframe").attr("height", ($(document).height() - 44));
+                window.open(_src, 'map_iframe', 'EnableViewPortScale=yes');
+            }
+        });
     };  //$scope.open_map = function (_location) {
 
     $scope.open_item_page = function (_isbn) {
