@@ -226,7 +226,7 @@ var _app_factory_book_cart = function ($scope, $filter) {
                     var _checked = 0;
                     var _create_timestamp = (new Date()).getTime();
                     var _update_timestamp = _create_timestamp;
-
+                    var _img = _data.img;
 
                     //alert("request_add [" + _i + "] 預備has_item");
                     $scope.has_item(_call_number, function (_result, _item) {
@@ -239,10 +239,10 @@ var _app_factory_book_cart = function ($scope, $filter) {
                             };
                             $scope.DB.exec('INSERT INTO list '
                                     + '(author, title, call_number, isbn, location, checked'
-                                    + ', create_timestamp, update_timestamp) '
+                                    + ', create_timestamp, update_timestamp, img) '
                                     + 'VALUES ("' + _author + '", "' + _title + '", "' + _call_number + '", "' + _isbn
                                     + '", "' + _location + '", ' + _checked + ', "' + _create_timestamp
-                                    + '", "' + _update_timestamp + '")',
+                                    + '", "' + _update_timestamp + '", "' + _img + '")',
                                     _db_callback);
                         }
                         else {

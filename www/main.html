@@ -69,14 +69,19 @@
                        ng-repeat="item in location.items"
                        class="list-item-container">
             <ons-row>
-                <ons-col ng-click="complete_item(item.id, $event)">
+                <ons-col ng-click="complete_item(item.id, $event)" width="20px">
                     <ons-icon icon="ion-ios-circle-outline" size="20px"></ons-icon>
-                    <span class="title">
-                        {{item.title}}
-                    </span>
-                    <span class="call_number">
-                        {{item.call_number}}
-                    </span>
+                </ons-col>
+                <ons-col>
+                    <img ng-src="{{item.img}}" ng-show="item.img !== 'null'" />
+                    <div class="title-col">
+                        <span class="title">
+                            {{item.title}}
+                        </span>
+                        <span class="call_number">
+                            {{item.call_number}}
+                        </span>
+                    </div>
                 </ons-col>
                 <ons-col width="50px" align="right"
                          ng-click="show_todo_list_popover(item.id, item.isbn, $event)">
@@ -94,10 +99,11 @@
             <ons-ripple class="ripple"><span class="rippledisplay: block; position: absolute;__wave"></span></ons-ripple>
             <ons-icon icon="ion-search" ></ons-icon>
         </label></ons-fab>
-    
+
     <!-- =============================================== -->
-    
-    <ons-modal var="scan_help_modal" ng-click="scan_help_modal.hide();scan_barcode();" class="scan-help-modal">
+
+    <ons-modal var="scan_help_modal" ng-click="scan_help_modal.hide();
+        scan_barcode();" class="scan-help-modal">
         <img src="img/scan-help.jpg" />
         <div class="message">
             請掃描圖書館網頁上的QR Code

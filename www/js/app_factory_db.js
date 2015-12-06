@@ -15,6 +15,7 @@ var _app_factory_db = function ($scope) {
             "isbn",
             "location",
             "checked",
+            "img",
             "create_timestamp",
             "update_timestamp"
         ]);

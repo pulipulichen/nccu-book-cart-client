@@ -24,10 +24,26 @@ ons-list-item.location {
 
 ons-list ons-list-item.list-item-container .title {
     font-weight: bold;
+    display: block;
 }
 
 ons-list ons-list-item.list-item-container .call_number {
-    font-size: smaller;color: orange;
+    font-size: smaller;
+    color: blue;
+}
+
+ons-list ons-list-item.list-item-container .title-col {
+    line-height: normal;
+    margin: 0.3rem;
+}
+
+ons-list ons-list-item.list-item-container img {
+    float: left;
+    margin-top: 0.1rem;
+}
+
+ons-list ons-list-item.list-item-container ons-col {
+    line-height: 48px;
 }
 
 ons-list ons-list-item.list-item-container .update_timestamp,

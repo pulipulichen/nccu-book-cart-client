@@ -2,8 +2,8 @@ var _app_factory_config = function ($scope) {
     $scope.config_init = function () {
 
         $scope.CONFIG = {
-            //"proxy_url": "http://public-nccu-book-cart-2015.dlll.nccu.edu.tw/nccu-book-cart-server/",
-            "proxy_url": "http://pulipuli.tk/nccu-book-cart-server/",
+            "proxy_url": "http://public-nccu-book-cart-2015.dlll.nccu.edu.tw/nccu-book-cart-server/",
+            //"proxy_url": "http://pulipuli.tk/nccu-book-cart-server/",
             "test_mode": false
         };
 
@@ -36,7 +36,8 @@ var _app_factory_config = function ($scope) {
             "商圖": $scope.CONFIG.proxy_url + "img/map/cbl_cht.png",
             "商圖附件": $scope.CONFIG.proxy_url + "img/map/cbl_cht.png",
             "傳圖": $scope.CONFIG.proxy_url + "img/map/cjl_cht.png",
-            "總圖撤架區(點此申請)": "https://subweb.lib.nccu.edu.tw/offshelf/?m=1202"
+            "總圖撤架區(點此申請)": "https://subweb.lib.nccu.edu.tw/offshelf/?m=1202",
+            "九舍書庫(點此申請)": "https://subweb.lib.nccu.edu.tw/offshelf/?m=1202"
         };
         $scope.map_title = "";
         $scope.map_src = "";
