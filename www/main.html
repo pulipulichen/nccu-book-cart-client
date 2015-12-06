@@ -18,7 +18,7 @@
         </div>
     </ons-toolbar>
 
-    <form id="scan_barcode" ng-submit="add();">
+    <form id="scan_barcode" ng-submit="add();$event.preventDefault();">
         <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
 
 
@@ -41,6 +41,7 @@
             <ons-col>
                 <input type="number" class="search-input" id="isbn" name="isbn"
                        value="{{isbn}}"
+                       ng-keypress="search_keydown($event)"
                        placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" />
                 <!--autofocus--> 
             </ons-col>
