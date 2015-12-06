@@ -22,7 +22,7 @@
         <ons-row style="width: calc(100% - 20px);margin: 0 auto;">
 
 
-            <ons-col width="120px" ng-click="scan_barcode()">
+            <ons-col width="120px" ng-click="scan_barcode_help()">
                 <ons-button id="search_barcode_button" modifier="cta">
                     <ons-icon icon="ion-qr-scanner" ></ons-icon>
 
@@ -39,7 +39,7 @@
             </ons-col>
             -->
             <ons-col>
-                <input type="text" class="search-input" id="isbn" name="isbn"
+                <input type="number" class="search-input" id="isbn" name="isbn"
                        value="{{isbn}}"
                        placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" />
                 <!--autofocus--> 
@@ -94,4 +94,20 @@
             <ons-ripple class="ripple"><span class="rippledisplay: block; position: absolute;__wave"></span></ons-ripple>
             <ons-icon icon="ion-search" ></ons-icon>
         </label></ons-fab>
+    
+    <!-- =============================================== -->
+    
+    <ons-modal var="scan_help_modal" ng-click="scan_help_modal.hide();scan_barcode();" class="scan-help-modal">
+        <img src="img/scan-help.jpg" />
+        <div class="message">
+            請掃描圖書館網頁上的QR Code
+        </div>
+        <label class="message"  ng-click="$event.stopPropagation();">
+            <input type="checkbox" id="scan_help_disable" />
+            下次不要提示
+        </label>
+        <ons-button>
+            開始掃描
+        </ons-button>
+    </ons-modal>
 </ons-page>

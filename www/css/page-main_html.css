@@ -34,3 +34,8 @@ ons-list ons-list-item.list-item-container .update_timestamp,
 ons-list ons-list-item.list-item-container .id {
     display: none;
 }
+
+.scan-help-modal .message {
+    display: block;
+    margin-bottom: 0.5rem;
+}

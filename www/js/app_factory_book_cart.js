@@ -355,6 +355,22 @@ var _app_factory_book_cart = function ($scope, $filter) {
 
         $scope.cordova_barcode_scan(_search, $scope.mock_url);
     };  //$scope.scan_barcode = function () {
+    
+    $scope.scan_barcode_help_disable = false;
+    
+    $scope.scan_barcode_help = function () {
+        //console.log($("#scan_help_disable").attr("checked"));
+        if ($("#scan_help_disable").attr("checked") === true) {
+            $scope.scan_barcode();
+        }
+        else {
+            scan_help_modal.show();
+        }
+    };  //$scope.scan_barcode = function () {
+    
+    $scope.set_scan_help_disable = function () {
+        $scope.scan_barcode_help_disable = true;
+    };
 
     $scope.share_app = function () {
         $scope.cordova_social_share($filter('translate')('SHARE_APP_TEXT'));
