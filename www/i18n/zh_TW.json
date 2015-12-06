@@ -5,7 +5,7 @@
 
     "TODO_LIST": "借書清單",
     "CLEAR_TODO_LIST": "您確定要清空借書清單嗎？",
-    "SCAN_BARCODE": "掃描條碼",
+    "SCAN_BARCODE": "掃描QR碼",
     "SEARCH": "搜尋",
     "SEARCH_PLACEHOLDER": "輸入國際標準號碼ISBN查詢...",
     "HAS_TIEM_ALERT": "已經有資料了。",
